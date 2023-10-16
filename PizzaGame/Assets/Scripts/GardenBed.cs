@@ -12,7 +12,7 @@ public class GardenBed : ActionObject, IInteractable
 
     private void Awake()
     {
-        OpenButton(new Vector3(0, 1.5f, 0), plantSeedIcon);
+        OpenButton(spawnPosition, plantSeedIcon);
     }
 
     public void Interact()
@@ -27,7 +27,7 @@ public class GardenBed : ActionObject, IInteractable
     {
         Give(seed.Ingredient, seed.AmountOfIngredients());
         isBusy = false;
-        OpenButton(new Vector3(0, 1.5f, 0), plantSeedIcon);
+        OpenButton(spawnPosition, plantSeedIcon);
     }
 
     private void PlantSeed()
@@ -40,6 +40,6 @@ public class GardenBed : ActionObject, IInteractable
     private IEnumerator Growing()
     {
         yield return new WaitForSeconds(seed.TimeToGrow);
-        OpenButton(new Vector3(0, 1.5f, 0), harvestIcon);
+        OpenButton(spawnPosition, harvestIcon);
     }
 }
