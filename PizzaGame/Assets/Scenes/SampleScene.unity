@@ -2177,6 +2177,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GardenBed
       objectReference: {fileID: 0}
+    - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
+      propertyPath: spawnPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3402841699023571324, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.292
