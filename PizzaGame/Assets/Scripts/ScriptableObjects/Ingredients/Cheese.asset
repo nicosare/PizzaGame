@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Cheese
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  nameOfIngredient: "\u0421\u044B\u0440"
+  nameOfObject: "\u0421\u044B\u0440"
