@@ -1,8 +1,6 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Ingredient", menuName = "Ingredient", order = 52)]
-public class Ingredient : ScriptableObject
+public class Ingredient : InventoryObject
 {
-    [SerializeField] private Sprite icon;
-    [SerializeField] private string nameOfIngredient;
 }
