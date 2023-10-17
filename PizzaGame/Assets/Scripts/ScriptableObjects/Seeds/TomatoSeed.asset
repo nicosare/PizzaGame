@@ -15,6 +15,6 @@ MonoBehaviour:
   icon: {fileID: 0}
   nameOfObject: "\u0421\u0435\u043C\u0435\u043D\u0430 \u043F\u043E\u043C\u0438\u0434\u043E\u0440\u0430"
   Ingredient: {fileID: 11400000, guid: 12dc5dff430869e4399794fb0838f97b, type: 2}
-  TimeToGrow: 0
-  minAmountInclusive: 0
-  maxAmountExclusive: 0
+  TimeToGrow: 2
+  minAmountInclusive: 2
+  maxAmountExclusive: 5

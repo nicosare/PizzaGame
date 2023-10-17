@@ -8,11 +8,16 @@ public class GardenBed : ActionObject, IInteractable
     [SerializeField] private Seed seed;
     [SerializeField] private Sprite plantSeedIcon;
     [SerializeField] private Sprite harvestIcon;
-    private bool isBusy = false;
+    private bool isBusy;
 
     private void Awake()
     {
         OpenButton(spawnPosition, plantSeedIcon);
+    }
+
+    private void Start()
+    {
+        Give(seed, 2);
     }
 
     public void Interact()

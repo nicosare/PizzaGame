@@ -1,20 +1,57 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public static class Inventory
+public class Inventory : MonoBehaviour
 {
-    private static List<InventoryObject> invenory;
+    private Dictionary<InventoryObject, int> inventory = new Dictionary<InventoryObject, int>();
+    public static Inventory Instance;
 
-    public static void AddObject(InventoryObject inventoryObject, int amount)
+    private void Awake()
     {
-        for (var i = 0; i < amount; i++)
-            invenory.Add(inventoryObject);
+        if (Instance != null && Instance != this)
+            Destroy(gameObject);
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
-    public static void TakeObject(InventoryObject inventoryObject, int amount)
+    public void CreateOrAddObject(InventoryObject inventoryObject, int amount)
     {
-        if(invenory.Contains(inventoryObject))
-            if(i)
+        if (inventory.ContainsKey(inventoryObject))
+            inventory[inventoryObject] += amount;
+        else
+            inventory.Add(inventoryObject, amount);
+    }
+
+    public bool TryTakeOrRemoveObject(InventoryObject inventoryObject, int amount)
+    {
+        if (CheckEnoughAmountObjects(inventoryObject, amount))
+        {
+            if (inventory[inventoryObject] == amount)
+                inventory.Remove(inventoryObject);
+            else
+                inventory[inventoryObject] -= amount;
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool CheckEnoughAmountObjects(InventoryObject inventoryObject, int amount)
+    {
+        return inventory.ContainsKey(inventoryObject) && inventory[inventoryObject] >= amount;
+    }
+
+    public void ShowInvenoryItems()
+    {
+        foreach (var item in inventory)
+        {
+            Debug.Log($"{item.Key}: {item.Value}");
+        }
     }
 }

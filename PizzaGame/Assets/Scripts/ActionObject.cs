@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Exception = System.Exception;
 
 public class ActionObject : MonoBehaviour
 {
-    [FormerlySerializedAs("actionButton")] [SerializeField] private ActionButtonCanvas actionButtonCanvas;
+    [SerializeField] private ActionButtonCanvas actionButtonCanvas;
     [SerializeField] protected Vector3 spawnPosition;
-
 
     protected void OpenButton(Vector3 buttonPosition, Sprite icon)
     {
@@ -20,13 +20,17 @@ public class ActionObject : MonoBehaviour
 
     protected void Give(InventoryObject inventoryObject, int amount = 1)
     {
-        Debug.Log($"{amount} of {inventoryObject.nameOfObject} given to inventory");
-        //TODO Реализовать инвентарь и добавить туда amount объектов
+        Inventory.Instance.CreateOrAddObject(inventoryObject, amount);
+        Inventory.Instance.ShowInvenoryItems();
     }
 
     protected void Take(InventoryObject inventoryObject, int amount = 1)
     {
-        Debug.Log($"{amount} of {inventoryObject.nameOfObject} taken from inventory");
-        //TODO Реализовать инвентарь и забрать оттуда amount объектов, если есть
+        if (Inventory.Instance.TryTakeOrRemoveObject(inventoryObject, amount))
+            Inventory.Instance.ShowInvenoryItems();
+        else
+        {
+            Debug.Log($"Недостаточно {inventoryObject}!");
+        }
     }
 }
