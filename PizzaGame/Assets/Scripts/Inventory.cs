@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
     private Dictionary<InventoryObject, int> inventory = new Dictionary<InventoryObject, int>();
     public static Inventory Instance;
+    [SerializeField] private InventoryObject[] testGiveObject;
 
     private void Awake()
     {
@@ -17,6 +19,14 @@ public class Inventory : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        foreach (var item in testGiveObject)
+        {
+            CreateOrAddObject(item, 1);
         }
     }
 
@@ -47,11 +57,14 @@ public class Inventory : MonoBehaviour
         return inventory.ContainsKey(inventoryObject) && inventory[inventoryObject] >= amount;
     }
 
-    public void ShowInvenoryItems()
+    public Dictionary<InventoryObject, int> GetAllItems()
     {
-        foreach (var item in inventory)
-        {
-            Debug.Log($"{item.Key}: {item.Value}");
-        }
+        return inventory;
+    }
+
+    public Dictionary<InventoryObject, int> GetSortedItemsByAmount()
+    {
+        return inventory.OrderByDescending(item => item.Value)
+            .ToDictionary(item => item.Key, item => item.Value);
     }
 }
