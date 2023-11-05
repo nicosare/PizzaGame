@@ -10,6 +10,7 @@ public class Seed : InventoryObject
     public int TimeToGrow;
     [SerializeField] private int minAmountInclusive;
     [SerializeField] private int maxAmountExclusive;
+    public MeshFilter[] MeshFilters;
 
     public int AmountOfIngredients()
     {
