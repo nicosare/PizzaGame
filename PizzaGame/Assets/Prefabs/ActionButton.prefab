@@ -133,7 +133,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 7787404372617518519}
-        m_TargetAssemblyTypeName: ActionButton, Assembly-CSharp
+        m_TargetAssemblyTypeName: ActionButtonCanvas, Assembly-CSharp
         m_MethodName: CloseButton
         m_Mode: 1
         m_Arguments:
@@ -259,3 +259,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda07af66aa48b44a99521dc80699127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActionButton: {fileID: 3600394568851387398}
