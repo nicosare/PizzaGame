@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class ActionObject : MonoBehaviour
+public abstract class ActionObject : MonoBehaviour
 {
-    [FormerlySerializedAs("actionButton")] [SerializeField] private ActionButtonCanvas actionButtonCanvas;
+    [SerializeField] private ActionButtonCanvas actionButtonCanvas;
     [SerializeField] protected Vector3 spawnPosition;
-
+    public InventoryObject Item;
+    public abstract Type typeOfNeededItem { get; }
 
     protected void OpenButton(Vector3 buttonPosition, Sprite icon)
     {
@@ -20,13 +21,26 @@ public class ActionObject : MonoBehaviour
 
     protected void Give(InventoryObject inventoryObject, int amount = 1)
     {
-        Debug.Log($"{amount} of {inventoryObject.nameOfObject} given to inventory");
-        //TODO Реализовать инвентарь и добавить туда amount объектов
+        Inventory.Instance.CreateOrAddObject(inventoryObject, amount);
     }
 
-    protected void Take(InventoryObject inventoryObject, int amount = 1)
+    public void Take(InventoryObject inventoryObject, int amount = 1)
     {
-        Debug.Log($"{amount} of {inventoryObject.nameOfObject} taken from inventory");
-        //TODO Реализовать инвентарь и забрать оттуда amount объектов, если есть
+        if (!Inventory.Instance.TryTakeOrRemoveObject(inventoryObject, amount))
+            Debug.Log($"Недостаточно {inventoryObject}!");
+    }
+
+    public abstract void StartAction();
+    public abstract void CancelAction();
+    public abstract void ItemDownCast();
+
+    public void SetItem(InventoryObject inventoryObject)
+    {
+        Item = inventoryObject;
+    }
+
+    protected void OpenInventoryField()
+    {
+        InventoryField.Instance.OpenInventoryField(this);
     }
 }
