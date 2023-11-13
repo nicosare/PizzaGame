@@ -23,8 +23,8 @@ public class InventoryField : MonoBehaviour
 
     public void OpenInventoryField(ActionObject actionObject)
     {
-        actionObjectCallBack = actionObject;
         CloseInventoryField();
+        actionObjectCallBack = actionObject;
         inventoryField.SetActive(true);
         cancelPanel.SetActive(true);
         LoadItems();
@@ -48,28 +48,43 @@ public class InventoryField : MonoBehaviour
         }
     }
 
+    public void UpdateItems()
+    {
+        if (inventoryField.activeSelf)
+        {
+            if (actionObjectCallBack != null)
+                OpenInventoryField(actionObjectCallBack);
+            else
+                ShowFullInventory();
+        }
+    }
+
     public void ShowFullInventory()
     {
-        if (!inventoryField.activeSelf)
+        CloseInventoryField();
+        inventoryField.SetActive(true);
+        cancelPanel.SetActive(true);
+        var allItems = Inventory.Instance.GetSortedItemsByAmount();
+        foreach (var item in allItems)
         {
-            inventoryField.SetActive(true);
-            cancelPanel.SetActive(true);
-            var allItems = Inventory.Instance.GetSortedItemsByAmount();
-            foreach (var item in allItems)
-            {
-                var newItemPanel = Instantiate(itemPanel, inventoryField.transform);
-                newItemPanel.FillData(item.Key, item.Value);
-                newItemPanel.GetComponent<Button>().interactable = false;
-            }
+            var newItemPanel = Instantiate(itemPanel, inventoryField.transform);
+            newItemPanel.FillData(item.Key, item.Value);
+            newItemPanel.GetComponent<Button>().interactable = false;
         }
-        else CloseInventoryField();
+    }
+
+    public void OpenCloseFullInventory()
+    {
+        if (!inventoryField.activeSelf)
+            ShowFullInventory();
+        else
+            CloseInventoryField();
     }
 
     public void CancelInventoryField()
     {
         if (actionObjectCallBack != null)
             actionObjectCallBack.CancelAction();
-        actionObjectCallBack = null;
         CloseInventoryField();
     }
 
@@ -80,6 +95,7 @@ public class InventoryField : MonoBehaviour
             foreach (Transform item in inventoryField.transform)
                 Destroy(item.gameObject);
 
+            actionObjectCallBack = null;
             inventoryField.SetActive(false);
             emptyInventoryText.SetActive(false);
             cancelPanel.SetActive(false);

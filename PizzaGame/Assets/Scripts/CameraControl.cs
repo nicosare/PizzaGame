@@ -1,23 +1,88 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    public float Speed;
+    [SerializeField] private float speed;
+
+    [SerializeField] private float leftBorder;
+    [SerializeField] private float rightBorder;
+    [SerializeField] private float topBorder;
+    [SerializeField] private float bottomBorder;
+
+    [SerializeField] private Transform leftPanel;
+    [SerializeField] private Transform rightPanel;
+    [SerializeField] private Transform topPanel;
+    [SerializeField] private Transform bottomPanel;
+
+    private Zoom zoom;
+
+    private void Awake()
+    {
+        zoom = GetComponent<Zoom>();
+    }
 
     public void Update()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && Input.touchCount < 2)
+        if (SystemInfo.deviceType != DeviceType.Handheld)
+            DesktopMoving();
+        else
+            MobileMoving();
+    }
+
+    private void DesktopMoving()
+    {
+        if (Input.mousePosition.x < leftPanel.position.x)
+            MoveTo(-speed, 0);
+        else if (Input.mousePosition.x > rightPanel.position.x)
+            MoveTo(speed, 0);
+
+        if (Input.mousePosition.y > topPanel.position.y)
+            MoveTo(0, speed);
+        else if (Input.mousePosition.y < bottomPanel.position.y)
+            MoveTo(0, -speed);
+    }
+
+
+
+    private void MobileMoving()
+    {
+        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
         {
-            Vector2 _touchdeltaPos = Input.GetTouch(0).deltaPosition;
+            var touchdeltaPos = Input.GetTouch(0).deltaPosition;
 
-            transform.Translate(-_touchdeltaPos.x * Speed, -_touchdeltaPos.y * Speed, 0);
-
-            transform.position = new Vector3(
-            Mathf.Clamp(transform.position.x, -4f, 4f),
-            Mathf.Clamp(transform.position.y, 0f, 5f),
-            Mathf.Clamp(transform.position.z, -40f, 40f));
+            MoveTo(-touchdeltaPos.x * speed, -touchdeltaPos.y * speed);
         }
+    }
+
+    private void CheckBorders()
+    {
+        transform.localPosition = new Vector3(
+                    Mathf.Clamp(transform.localPosition.x, leftBorder, rightBorder),
+                    Mathf.Clamp(transform.localPosition.y, bottomBorder, topBorder),
+                    transform.position.z);
+    }
+
+    public void SetBorder()
+    {
+        var normalizedZ = (transform.position.z - zoom.zoomMin) / (zoom.zoomMax - zoom.zoomMin);
+
+        //lx
+        leftBorder = Mathf.Lerp(0, -7f, normalizedZ);
+        rightBorder = Mathf.Lerp(0, 7f, normalizedZ);
+        bottomBorder = Mathf.Lerp(-3f, -7f, normalizedZ);
+        topBorder = Mathf.Lerp(11f, 7f, normalizedZ);
+        CheckBorders();
+
+    }
+
+    private void MoveTo(float xDirection, float yDirection)
+    {
+        transform.Translate(xDirection, yDirection, 0);
+        CheckBorders();
+
     }
 }
