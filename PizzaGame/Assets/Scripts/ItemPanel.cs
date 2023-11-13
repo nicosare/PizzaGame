@@ -13,8 +13,8 @@ public class ItemPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemAmount;
 
     public ActionObject ActionObjectCallBack;
-    private InventoryObject inventoryObject;
-    private int amountOfItems;
+    public InventoryObject InventoryObject;
+    public int AmountOfItems;
     private InventoryField inventoryField;
 
     private void Start()
@@ -24,8 +24,8 @@ public class ItemPanel : MonoBehaviour
 
     public void FillData(InventoryObject item, int amount)
     {
-        inventoryObject = item;
-        amountOfItems = amount;
+        InventoryObject = item;
+        AmountOfItems = amount;
         itemIcon.sprite = item.icon;
         itemName.text = item.nameOfObject;
         itemAmount.text = amount.ToString();
@@ -33,9 +33,7 @@ public class ItemPanel : MonoBehaviour
 
     public void TakeFromInventory()
     {
-        ActionObjectCallBack.SetItem(inventoryObject);
-        ActionObjectCallBack.Take(inventoryObject);
-        ActionObjectCallBack.StartAction();
+        TaskManager.Instance.CreateTask(ActionObjectCallBack.TaskTake, ActionObjectCallBack, InventoryObject);
         inventoryField.CloseInventoryField();
     }
 }

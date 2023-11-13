@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour
     {
         foreach (var item in testGiveObject)
         {
-            CreateOrAddObject(item, 1);
+            CreateOrAddObject(item, 2);
         }
     }
 
@@ -36,6 +36,7 @@ public class Inventory : MonoBehaviour
             inventory[inventoryObject] += amount;
         else
             inventory.Add(inventoryObject, amount);
+        InventoryField.Instance.UpdateItems();
     }
 
     public bool TryTakeOrRemoveObject(InventoryObject inventoryObject, int amount)
@@ -46,6 +47,7 @@ public class Inventory : MonoBehaviour
                 inventory.Remove(inventoryObject);
             else
                 inventory[inventoryObject] -= amount;
+            InventoryField.Instance.UpdateItems();
             return true;
         }
 

@@ -4,23 +4,23 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GardenBed : ActionObject, IInteractable
+public class GardenBed : ActionObject
 {
     [SerializeField] private Sprite plantSeedIcon;
     [SerializeField] private Sprite harvestIcon;
-    private bool isBusy;
+    private bool isPlantSeeded;
     private Seed seed;
     private MeshFilter sproutMesh;
     public override Type typeOfNeededItem => typeof(Seed);
-    
+
     private void Awake()
     {
         OpenButton(spawnPosition, plantSeedIcon);
     }
 
-    public void Interact()
+    public override void Interact()
     {
-        if (!isBusy)
+        if (!isPlantSeeded)
             OpenInventoryWithSeeds();
         else
             Harvest();
@@ -28,28 +28,40 @@ public class GardenBed : ActionObject, IInteractable
 
     private void Harvest()
     {
-        Destroy(sproutMesh.gameObject);
-        Give(seed.Ingredient, seed.AmountOfIngredients());
-        isBusy = false;
-        OpenButton(spawnPosition, plantSeedIcon);
+        TaskManager.Instance.CreateTask(TaskGive, this, seed.Ingredient, seed.AmountOfIngredients());
     }
 
     private void OpenInventoryWithSeeds()
     {
-        isBusy = true;
         OpenInventoryField();
     }
 
     public override void StartAction()
     {
-        ItemDownCast();
-        StartCoroutine(Growing());
+        if (!isPlantSeeded)
+        {
+            isPlantSeeded = true;
+            ItemDownCast();
+            StartCoroutine(Growing());
+        }
+        else
+        {
+            isPlantSeeded = false;
+            DestroyPlant();
+        }
+    }
+    private void DestroyPlant()
+    {
+        Destroy(sproutMesh.gameObject);
+        OpenButton(spawnPosition, plantSeedIcon);
     }
 
     public override void CancelAction()
     {
-        isBusy = false;
-        OpenButton(spawnPosition, plantSeedIcon);
+        if (!isPlantSeeded)
+            OpenButton(spawnPosition, plantSeedIcon);
+        else
+            OpenButton(spawnPosition, harvestIcon);
     }
 
     public override void ItemDownCast()
@@ -59,6 +71,7 @@ public class GardenBed : ActionObject, IInteractable
 
     private IEnumerator Growing()
     {
+        isPlantSeeded = true;
         sproutMesh = Instantiate(seed.MeshFilters[0], transform);
         yield return new WaitForSeconds(seed.TimeToGrow / seed.MeshFilters.Length);
         for (var i = 1; i < seed.MeshFilters.Length; i++)
