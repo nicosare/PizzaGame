@@ -6,14 +6,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
-public class PlayerMove : MonoBehaviour
+public class Moving : MonoBehaviour
 {
     [SerializeField] float rotationSpeed;
     private NavMeshAgent meshAgent;
     public Vector3 TargetPosition;
     public bool IsCome = true;
 
-    void Start()
+    void Awake()
     {
         meshAgent = GetComponent<NavMeshAgent>();
     }
@@ -28,7 +28,7 @@ public class PlayerMove : MonoBehaviour
     {
         IsCome = false;
         TargetPosition = position;
-        meshAgent.SetDestination(TargetPosition);
+        meshAgent.destination = TargetPosition;
     }
 
     private void Rotating()
