@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Task : MonoBehaviour
 {
-    private PlayerMove playerMove;
+    private Moving playerMove;
     protected ActionObject actionObject;
     protected InventoryObject inventoryObject;
     protected int amountOfObjects;
@@ -13,7 +13,7 @@ public class Task : MonoBehaviour
 
     private void Awake()
     {
-        playerMove = FindObjectOfType<PlayerMove>();
+        playerMove = GameObject.FindGameObjectWithTag("Player").GetComponent<Moving>();
     }
 
     protected void CallPlayer(Vector3 position)
