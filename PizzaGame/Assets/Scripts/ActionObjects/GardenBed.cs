@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class GardenBed : ActionObject
 {
     [SerializeField] private Sprite plantSeedIcon;
     [SerializeField] private Sprite harvestIcon;
+    [SerializeField] private TextMeshProUGUI plantName;
     private bool isPlantSeeded;
     private Seed seed;
     private MeshFilter sproutMesh;
@@ -15,6 +17,7 @@ public class GardenBed : ActionObject
 
     private void Awake()
     {
+        plantName.text = "";
         OpenButton(spawnPosition, plantSeedIcon);
     }
 
@@ -52,6 +55,7 @@ public class GardenBed : ActionObject
     }
     private void DestroyPlant()
     {
+        plantName.text = "";
         Destroy(sproutMesh.gameObject);
         OpenButton(spawnPosition, plantSeedIcon);
     }
@@ -72,6 +76,7 @@ public class GardenBed : ActionObject
     private IEnumerator Growing()
     {
         isPlantSeeded = true;
+        plantName.text = seed.Ingredient.nameOfObject;
         sproutMesh = Instantiate(seed.MeshFilters[0], transform);
         yield return new WaitForSeconds(seed.TimeToGrow / seed.MeshFilters.Length);
         for (var i = 1; i < seed.MeshFilters.Length; i++)
