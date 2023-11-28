@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
 {
     private Dictionary<InventoryObject, int> inventory = new Dictionary<InventoryObject, int>();
     public static Inventory Instance;
+    [SerializeField] private List<Window> windows;
     [SerializeField] private InventoryObject[] testGiveObject;
 
     private void Awake()
@@ -26,7 +27,7 @@ public class Inventory : MonoBehaviour
     {
         foreach (var item in testGiveObject)
         {
-            CreateOrAddObject(item, 2);
+            CreateOrAddObject(item, 5);
         }
     }
 
@@ -36,7 +37,9 @@ public class Inventory : MonoBehaviour
             inventory[inventoryObject] += amount;
         else
             inventory.Add(inventoryObject, amount);
-        InventoryField.Instance.UpdateItems();
+
+        foreach (var window in windows)
+        WindowsController.Instance.UpdateWindow(window);
     }
 
     public bool TryTakeOrRemoveObject(InventoryObject inventoryObject, int amount)
@@ -47,7 +50,10 @@ public class Inventory : MonoBehaviour
                 inventory.Remove(inventoryObject);
             else
                 inventory[inventoryObject] -= amount;
-            InventoryField.Instance.UpdateItems();
+            
+            foreach (var window in windows)
+            WindowsController.Instance.UpdateWindow(window);
+
             return true;
         }
 
@@ -59,6 +65,13 @@ public class Inventory : MonoBehaviour
         return inventory.ContainsKey(inventoryObject) && inventory[inventoryObject] >= amount;
     }
 
+    public int GetAmountOfObject(InventoryObject inventoryObject)
+    {
+        if (inventory.ContainsKey(inventoryObject))
+            return inventory[inventoryObject];
+        else return 0;
+    }
+
     public Dictionary<InventoryObject, int> GetAllItems()
     {
         return inventory;
@@ -67,6 +80,7 @@ public class Inventory : MonoBehaviour
     public Dictionary<InventoryObject, int> GetSortedItemsByAmount()
     {
         return inventory.OrderByDescending(item => item.Value)
+            .Where(item => item.Key is not Pizza)
             .ToDictionary(item => item.Key, item => item.Value);
     }
 }
