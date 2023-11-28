@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4482451, g: 0.49827182, b: 0.57558125, a: 1}
+  m_IndirectSpecularColor: {r: 0.4482447, g: 0.49827164, b: 0.57558084, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2866,6 +2866,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
+      propertyPath: spawnPosition.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
       propertyPath: actionButtonCanvas
       value: 
       objectReference: {fileID: 7787404372617518519, guid: 12b25ac6f31954a419b8e1ea425ea4d9, type: 3}
@@ -4400,6 +4404,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
+      propertyPath: spawnPosition.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
       propertyPath: actionButtonCanvas
       value: 
       objectReference: {fileID: 7787404372617518519, guid: 12b25ac6f31954a419b8e1ea425ea4d9, type: 3}
@@ -4568,6 +4576,10 @@ PrefabInstance:
     - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
       propertyPath: spawnPosition.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
+      propertyPath: spawnPosition.z
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
       propertyPath: actionButtonCanvas
@@ -5232,6 +5244,10 @@ PrefabInstance:
     - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
       propertyPath: spawnPosition.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
+      propertyPath: spawnPosition.z
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
       propertyPath: actionButtonCanvas
@@ -13595,6 +13611,10 @@ PrefabInstance:
     - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
       propertyPath: spawnPosition.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
+      propertyPath: spawnPosition.z
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3319642353238071296, guid: 9c18ac23a1df9ac4daa24bbd7f9d1c95, type: 3}
       propertyPath: actionButtonCanvas

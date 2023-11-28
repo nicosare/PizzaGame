@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aac2cdadbac923418d4d39ec67dac85, type: 3}
   m_Name: Mushrooms
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  Icon: {fileID: 597489463, guid: 24651ac57690824499f88d46656053fe, type: 3}
   nameOfObject: "\u0413\u0440\u0438\u0431\u044B"
+  ingredients: []
