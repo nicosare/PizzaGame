@@ -230,6 +230,8 @@ MonoBehaviour:
   itemName: {fileID: 7529662377254292066}
   itemAmount: {fileID: 2756772161580985662}
   ActionObjectCallBack: {fileID: 0}
+  InventoryObject: {fileID: 0}
+  AmountOfItems: 0
 --- !u!114 &7115563876222424003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,10 +353,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ItemName
+  m_text: "\u0418\u0442\u0435\u043C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
