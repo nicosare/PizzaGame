@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aac2cdadbac923418d4d39ec67dac85, type: 3}
   m_Name: Dough
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  Icon: {fileID: 0}
   nameOfObject: "\u0422\u0435\u0441\u0442\u043E"
+  ingredients:
+  - {fileID: 11400000, guid: f28217ea4d103ab4981e2f550b524733, type: 2}
+  - {fileID: 11400000, guid: 2df518ae23a7fdd46a45babd798fae34, type: 2}
+  - {fileID: 11400000, guid: 61749bf2fcee229408e420487cfb16f5, type: 2}

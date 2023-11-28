@@ -25,6 +25,7 @@ public class Task : MonoBehaviour
     private IEnumerator WaitPlayerCome()
     {
         yield return new WaitUntil(() => playerMove.IsCome);
+        TaskManager.Instance.BlockCreateTask = false;
         InnerDo();
         CompleteTask();
     }

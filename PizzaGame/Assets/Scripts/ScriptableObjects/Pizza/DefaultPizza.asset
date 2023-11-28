@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3135298fe2f2594ea79aa27900c5d8a, type: 3}
   m_Name: DefaultPizza
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: c5bf3b67ce6064a4085877e3e2dd22cb, type: 3}
+  Icon: {fileID: 21300000, guid: c5bf3b67ce6064a4085877e3e2dd22cb, type: 3}
   nameOfObject: "\u0421\u0430\u043C\u0430\u044F \u043E\u0431\u044B\u043A\u043D\u043E\u0432\u0435\u043D\u043D\u0430\u044F
     \u043F\u0438\u0446\u0446\u0430"
   ingredients:
+  - {fileID: 11400000, guid: c4598f8f30d59e7468a816f904500caa, type: 2}
+  - {fileID: 11400000, guid: 9be2e1097eabcb34381a124db898e6f6, type: 2}
   - {fileID: 11400000, guid: b9ae618e42e4d3547924fe2fd3d0f4b6, type: 2}
   - {fileID: 11400000, guid: 6b005e77d9703954d8db7dff67c2d3e3, type: 2}
   - {fileID: 11400000, guid: 223ba03a0f83736479f13622336c79a6, type: 2}
-  - {fileID: 11400000, guid: 9be2e1097eabcb34381a124db898e6f6, type: 2}
   cost: 0
   minimalCafeRating: 0
