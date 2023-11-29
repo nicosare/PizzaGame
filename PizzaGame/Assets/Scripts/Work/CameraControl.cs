@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour
@@ -25,6 +24,11 @@ public class CameraControl : MonoBehaviour
         zoom = GetComponent<Zoom>();
     }
 
+    private void Start()
+    {
+        SetBorder();
+    }
+
     public void Update()
     {
         if (SystemInfo.deviceType != DeviceType.Handheld)
@@ -45,8 +49,6 @@ public class CameraControl : MonoBehaviour
         else if (Input.mousePosition.y < bottomPanel.position.y)
             MoveTo(0, -speed);
     }
-
-
 
     private void MobileMoving()
     {
@@ -69,12 +71,10 @@ public class CameraControl : MonoBehaviour
     public void SetBorder()
     {
         var normalizedZ = (transform.position.z - zoom.zoomMin) / (zoom.zoomMax - zoom.zoomMin);
-
-        //lx
         leftBorder = Mathf.Lerp(0, -7f, normalizedZ);
         rightBorder = Mathf.Lerp(0, 7f, normalizedZ);
-        bottomBorder = Mathf.Lerp(-3f, -7f, normalizedZ);
-        topBorder = Mathf.Lerp(11f, 7f, normalizedZ);
+        bottomBorder = Mathf.Lerp(1, -7f, normalizedZ);
+        topBorder = Mathf.Lerp(12f, 7f, normalizedZ);
         CheckBorders();
 
     }
