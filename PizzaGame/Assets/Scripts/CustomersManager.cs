@@ -9,7 +9,7 @@ public class CustomersManager : MonoBehaviour
     [SerializeField] private Moving customer;
     [SerializeField] Transform orderPlace;
     [SerializeField] List<Transform> sittingPlaces;
-    [SerializeField] Transform quitPlace;
+    [SerializeField] List<Transform> quitPlaces;
     public TextAsset CustomerNames;
     public List<Moving> Customers;
     public List<Moving> WaitingCustomers;
@@ -52,7 +52,7 @@ public class CustomersManager : MonoBehaviour
     public Vector3 GetQuitPosition()
     {
         MoveQueue();
-        return quitPlace.position + new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2));
+        return quitPlaces.Shuffle().First().position + new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2));
     }
 
     private void MoveQueue()

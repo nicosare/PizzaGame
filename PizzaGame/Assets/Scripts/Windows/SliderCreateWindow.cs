@@ -49,7 +49,7 @@ public class SliderCreateWindow : Window
     {
         for (var i = 0; i < takePanels.Count; i++)
         {
-            takePanels[i].CountText.text = $"{ingredients[i].name} {slider.value}/{Inventory.Instance.GetAmountOfObject(ingredients[i])}";
+            takePanels[i].CountText.text = $"{slider.value}/{Inventory.Instance.GetAmountOfObject(ingredients[i])}";
             if (Inventory.Instance.GetAmountOfObject(ingredients[i]) == 0)
                 cookButton.enabled = false;
             else
@@ -68,12 +68,10 @@ public class SliderCreateWindow : Window
     public void Cook()
     {
         TaskManager.Instance.CreateTask(ActionObjectCallBack.TaskCook, ActionObjectCallBack, ActionObjectCallBack.CookedInventoryObject, (int)slider.value);
-        CloseWindow();
     }
 
     public override void StartAction(ActionObject actionObject)
     {
-        Debug.Log("Update!");
         ActionObjectCallBack = actionObject;
 
         if (takePanels.Count > 0 && ActionObjectCallBack != null)

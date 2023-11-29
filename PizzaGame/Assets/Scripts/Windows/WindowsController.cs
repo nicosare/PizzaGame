@@ -20,6 +20,9 @@ public class WindowsController : MonoBehaviour
 
     private void Update()
     {
+        if (windowsList.All(win => !win.gameObject.activeSelf))
+            OpenWindow(windowsList[0]);
+
         if (Input.GetKeyDown(KeyCode.E))
             OpenWindow(FullInventoryWindow);
     }
@@ -61,14 +64,14 @@ public class WindowsController : MonoBehaviour
 
     public void CloseWindow(Window window)
     {
-        window.CloseWindow();
         OpenWindow(windowsList[0]);
+        window.CloseWindow();
         windowsList[1].gameObject.SetActive(false);
     }
     public void CloseWindow(int windowIndex)
     {
-        windowsList[windowIndex].CloseWindow();
         OpenWindow(windowsList[0]);
+        windowsList[windowIndex].CloseWindow();
         windowsList[1].gameObject.SetActive(false);
     }
 
