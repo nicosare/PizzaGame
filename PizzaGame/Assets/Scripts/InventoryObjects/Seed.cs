@@ -6,8 +6,7 @@ using UnityEngine;
 public class Seed : InventoryObject
 {
     public Ingredient Ingredient;
-    private int ingredientsAmount;
-    public int TimeToGrow;
+    public float TimeToGrow;
     [SerializeField] private int minAmountInclusive;
     [SerializeField] private int maxAmountExclusive;
     public MeshFilter[] MeshFilters;

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CustomersManager : MonoBehaviour
 {
+    public static CustomersManager Instance;
     [SerializeField] private Moving customer;
     [SerializeField] Transform orderPlace;
     [SerializeField] List<Transform> sittingPlaces;
@@ -14,6 +15,12 @@ public class CustomersManager : MonoBehaviour
     public List<Moving> Customers;
     public List<Moving> WaitingCustomers;
     private List<Transform> freeSittingPlaces;
+    public float WaitInQueueScale;
+    
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -30,6 +37,7 @@ public class CustomersManager : MonoBehaviour
         for (int i = 0; i < 7; i++)
         {
             var newCustomer = Instantiate(customer, transform);
+            newCustomer.GetComponent<Customer>().WaitingQueueTime *= WaitInQueueScale;
             Customers.Add(newCustomer);
             yield return new WaitForSeconds(1);
         }

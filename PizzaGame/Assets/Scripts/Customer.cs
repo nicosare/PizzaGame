@@ -12,9 +12,9 @@ public partial class Customer : ActionObject
 {
     [SerializeField] private TimerCircle timer;
     [SerializeField] private ActionButtonCanvas takeOrderButton;
-    [SerializeField] private float waitingQueueTime;
     [SerializeField] private Sprite cancelOrderIcon;
     [SerializeField] private Transform customerUI;
+    public float WaitingQueueTime;
     public TextMeshProUGUI CustomerName;
     private CustomersManager customersManager;
     private Moving moving;
@@ -44,7 +44,6 @@ public partial class Customer : ActionObject
             GoToSittingPlace,
             WaitOrder
         };
-        timer.MaxTime = waitingQueueTime;
         timer.gameObject.SetActive(false);
         takeOrderButton.gameObject.SetActive(false);
         moving = GetComponent<Moving>();
@@ -94,6 +93,7 @@ public partial class Customer : ActionObject
 
     private void WaitOrderAcceptance()
     {
+        timer.MaxTime = WaitingQueueTime;
         timer.gameObject.SetActive(true);
         takeOrderButton.gameObject.SetActive(true);
     }
@@ -150,7 +150,6 @@ public partial class Customer : ActionObject
 
     private CustomerStage SetStage()
     {
-        Debug.Log(currentStage);
         actions[(int)currentStage].Invoke();
         return CurrentStage;
     }
