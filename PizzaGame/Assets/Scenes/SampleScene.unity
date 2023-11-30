@@ -7982,6 +7982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4858f94733a64241a8f44b330138635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ratingAmount: 20
   gardenBeds:
   - {fileID: 1373823453}
   - {fileID: 994453505}
@@ -7989,7 +7990,6 @@ MonoBehaviour:
   - {fileID: 1831062783}
   - {fileID: 617228832}
   gardenBedTimeScale: 1.5
-  ratingAmount: 20
 --- !u!1 &899039808
 GameObject:
   m_ObjectHideFlags: 0
@@ -24387,6 +24387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2e27c7c9a13cd40902d568555adc38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ratingAmount: 50
   waitInQueueTimeScale: 1.5
 --- !u!33 &5603029164455670659
 MeshFilter:
