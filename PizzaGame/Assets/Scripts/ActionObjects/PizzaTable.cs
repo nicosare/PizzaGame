@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PizzaTable : ActionObject
 {
     [SerializeField] private Sprite createPizzaIcon;
-    [SerializeField] private Furnace furnace;
+    [SerializeField] private List<Furnace> furnaces;
     public override Type typeOfNeededItem => throw new NotImplementedException();
 
     private void Awake()
@@ -36,6 +37,7 @@ public class PizzaTable : ActionObject
     public override void StartAction()
     {
         Pizzas.Remove((Pizza)CookedInventoryObject);
-        TaskManager.Instance.CreateTask(TaskTake, furnace, CookedInventoryObject, 1, true);
+        var freeFurnace = furnaces.Where(furnace => furnace.CookedInventoryObject == null && furnace.gameObject.activeSelf).First();
+        TaskManager.Instance.CreateTask(TaskTake, freeFurnace, CookedInventoryObject, 1, true);
     }
 }
