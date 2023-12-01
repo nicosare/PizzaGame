@@ -9,6 +9,6 @@ using UnityEngine;
         public string login;
         public string password;
         public string email;
-        public int age;
+        public string age;
         public int gender;
     }
