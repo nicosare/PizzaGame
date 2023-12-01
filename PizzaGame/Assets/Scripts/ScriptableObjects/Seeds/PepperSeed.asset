@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e15bd0fa864e1349ac5bfcb2b905f1b, type: 3}
+  m_Name: PepperSeed
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
+  nameOfObject: "\u0421\u0435\u043C\u0435\u043D\u0430 \u043F\u0435\u0440\u0446\u0430"
+  Ingredient: {fileID: 11400000, guid: 65760fe9b0173d0409dd7581668035cf, type: 2}
+  TimeToGrow: 10
+  minAmountInclusive: 2
+  maxAmountExclusive: 5
+  MeshFilters:
+  - {fileID: 1655723949442755250, guid: be8d73d63288d3249b923fe66c4f22fa, type: 3}
+  - {fileID: 4003338953899141706, guid: 1567a732fe6ee034baf80021cbf12dd5, type: 3}
+  - {fileID: 1711790063626064084, guid: 33855ab1ce6140d4eaf7a69364a4b3a1, type: 3}

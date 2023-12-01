@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3135298fe2f2594ea79aa27900c5d8a, type: 3}
   m_Name: VegetarianPizza
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 0b9934403107bb847a9e7dd2d7f0b389, type: 3}
+  Icon: {fileID: 21300000, guid: 0b9934403107bb847a9e7dd2d7f0b389, type: 3}
   nameOfObject: "\u0412\u0435\u0433\u0435\u0442\u0430\u0440\u0438\u0430\u043D\u0441\u043A\u0430\u044F
     \u043F\u0438\u0446\u0446\u0430"
   ingredients:
+  - {fileID: 11400000, guid: c4598f8f30d59e7468a816f904500caa, type: 2}
+  - {fileID: 11400000, guid: 9be2e1097eabcb34381a124db898e6f6, type: 2}
+  - {fileID: 11400000, guid: 215ee0e256493ea46924a115487142c4, type: 2}
+  - {fileID: 11400000, guid: 12dc5dff430869e4399794fb0838f97b, type: 2}
   - {fileID: 11400000, guid: 223ba03a0f83736479f13622336c79a6, type: 2}
   - {fileID: 11400000, guid: 65760fe9b0173d0409dd7581668035cf, type: 2}
-  - {fileID: 11400000, guid: 12dc5dff430869e4399794fb0838f97b, type: 2}
-  - {fileID: 11400000, guid: 215ee0e256493ea46924a115487142c4, type: 2}
-  - {fileID: 11400000, guid: 9be2e1097eabcb34381a124db898e6f6, type: 2}
   cost: 0
   minimalCafeRating: 0

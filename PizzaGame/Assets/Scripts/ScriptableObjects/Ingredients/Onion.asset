@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aac2cdadbac923418d4d39ec67dac85, type: 3}
   m_Name: Onion
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  Icon: {fileID: -909181839, guid: 24651ac57690824499f88d46656053fe, type: 3}
   nameOfObject: "\u041B\u0443\u043A"
+  ingredients: []
