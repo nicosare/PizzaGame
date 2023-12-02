@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Token
+public static class SaveToken
 {
-    public static string token;
+    public static string Token { get; set; }
 }
