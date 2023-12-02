@@ -88,8 +88,8 @@ public class PostRequest : MonoBehaviour
 
         yield return request.SendWebRequest();
 
-        Token.token = request.downloadHandler.text;
-        Debug.Log(Token.token);
+        SaveToken.Token = request.downloadHandler.text;
+        Debug.Log(SaveToken.Token);
 
         //PlayerRegistration playerRegisteredInfo = JsonUtility.FromJson<PlayerRegistration>(request.downloadHandler.text);
 
