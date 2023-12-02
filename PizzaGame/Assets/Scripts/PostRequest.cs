@@ -13,6 +13,8 @@ public class PostRequest : MonoBehaviour
     private string urlReg = "https://a22421-7263.c.d-f.pw/api/v1/player/registration";
     private string urlAuth = "https://a22421-7263.c.d-f.pw/api/v1/player/authorization";
     [SerializeField] GameObject mainMenuPanel;
+    [SerializeField] GameObject regMenuPanel;
+    [SerializeField] GameObject authMenuPanel;
     [SerializeField] private Sprite errorAuth;
     [SerializeField] private Sprite errorReg;
     [SerializeField] private TMP_Text error409;
@@ -54,7 +56,10 @@ public class PostRequest : MonoBehaviour
         yield return request.SendWebRequest();
 
         if (registrationPostResponseCodeSucces == request.responseCode)
+        {
             mainMenuPanel.gameObject.SetActive(true);
+            regMenuPanel.gameObject.SetActive(false);
+        }
         if (409 == request.responseCode)
         {
             error409.gameObject.SetActive(true);
@@ -94,7 +99,10 @@ public class PostRequest : MonoBehaviour
         //PlayerRegistration playerRegisteredInfo = JsonUtility.FromJson<PlayerRegistration>(request.downloadHandler.text);
 
         if (authorizationPostResponseCodeSucces == request.responseCode)
+        {
             mainMenuPanel.gameObject.SetActive(true);
+            authMenuPanel.gameObject.SetActive(false);
+        }
         if (401 == request.responseCode)
         {
             error401.gameObject.SetActive(true);

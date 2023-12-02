@@ -14551,20 +14551,19 @@ MonoBehaviour:
   - {fileID: 1554600905}
   testGiveObject:
   - {fileID: 11400000, guid: 29dfc11f27e9b1941a793b03c271f4fb, type: 2}
-  - {fileID: 11400000, guid: 71dc693f5b858544ea42bf013c7ae2f3, type: 2}
   - {fileID: 11400000, guid: 215ee0e256493ea46924a115487142c4, type: 2}
   - {fileID: 11400000, guid: 61749bf2fcee229408e420487cfb16f5, type: 2}
   - {fileID: 11400000, guid: 2df518ae23a7fdd46a45babd798fae34, type: 2}
   - {fileID: 11400000, guid: 6b005e77d9703954d8db7dff67c2d3e3, type: 2}
-  - {fileID: 11400000, guid: b9ae618e42e4d3547924fe2fd3d0f4b6, type: 2}
   - {fileID: 11400000, guid: 223ba03a0f83736479f13622336c79a6, type: 2}
   - {fileID: 11400000, guid: 65760fe9b0173d0409dd7581668035cf, type: 2}
   - {fileID: 11400000, guid: 8088cc1f07af103489172b815ed3c3e7, type: 2}
   - {fileID: 11400000, guid: 5ba785986b201d64e8873fdfa4810f59, type: 2}
   - {fileID: 11400000, guid: 9be2e1097eabcb34381a124db898e6f6, type: 2}
-  - {fileID: 11400000, guid: f28217ea4d103ab4981e2f550b524733, type: 2}
-  - {fileID: 11400000, guid: 4eb0d3ab088ce984f90752ba0f1e3d87, type: 2}
+  - {fileID: 11400000, guid: dfe086a129d843b49bb052ba9869bb53, type: 2}
   - {fileID: 11400000, guid: c4598f8f30d59e7468a816f904500caa, type: 2}
+  - {fileID: 11400000, guid: ab795fa236210b24a86d5c2402a30a6f, type: 2}
+  - {fileID: 11400000, guid: 85dfce7bdcb6cc841a6749b44d0ee24a, type: 2}
 --- !u!4 &1961129518
 Transform:
   m_ObjectHideFlags: 0
