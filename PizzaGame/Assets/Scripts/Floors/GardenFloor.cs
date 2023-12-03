@@ -15,35 +15,35 @@ public class GardenFloor : Floor
         for (var i = 0; i < availableGardenBedsCount && i < gardenBeds.Count; i++)
             gardenBeds[i].gameObject.SetActive(true);
 
-        firstUpgrade = new List<Upgrade>
+        FirstUpgrade = new List<(Upgrade upgrade, string upgradeInfo)>
         {
-            AddGardenBedUpgrade,
-            SpeedUpGrowTimeUpgrade,
-            MoreIngredientsUpgrade,
-            AddRatingUpgrade
+            (AddGardenBedUpgrade, $"Количество грядок: {availableGardenBedsCount+1}"),
+            (SpeedUpGrowTimeUpgrade, $"Семена растут в {gardenBedTimeScale} раза быстрее"),
+            (MoreIngredientsUpgrade, $"Больше собираемых ингредиентов"),
+            (AddRatingUpgrade, $"Рейтинг + {ratingAmount}")
         };
 
-        secondUpgrade = new List<Upgrade>
+        SecondUpgrade = new List<(Upgrade upgrade, string upgradeInfo)>
         {
-            AddGardenBedUpgrade,
-            SpeedUpGrowTimeUpgrade,
-            MoreIngredientsUpgrade,
-            AddRatingUpgrade
+            (AddGardenBedUpgrade, $"Количество грядок: {availableGardenBedsCount+2}"),
+            (SpeedUpGrowTimeUpgrade, $"Семена растут в {gardenBedTimeScale*gardenBedTimeScale} раза быстрее"),
+            (MoreIngredientsUpgrade, $"Больше собираемых ингредиентов"),
+            (AddRatingUpgrade, $"Рейтинг + {ratingAmount*ratingUpScale}")
         };
 
-        thirdUpgrade = new List<Upgrade>
+        ThirdUpgrade = new List<(Upgrade upgrade, string upgradeInfo)>
         {
-            AddGardenBedUpgrade,
-            SpeedUpGrowTimeUpgrade,
-            MoreIngredientsUpgrade,
-            AddRatingUpgrade
+            (AddGardenBedUpgrade, $"Количество грядок: {availableGardenBedsCount+3}"),
+            (SpeedUpGrowTimeUpgrade, $"Семена растут в {gardenBedTimeScale*gardenBedTimeScale*gardenBedTimeScale} раза быстрее"),
+            (MoreIngredientsUpgrade, $"Больше собираемых ингредиентов"),
+            (AddRatingUpgrade, $"Рейтинг + {ratingAmount*ratingUpScale*ratingUpScale}")
         };
     }
 
     protected override void SetLevel()
     {
         //TODO Подключиться к базе данных
-        floorLevel = 0;
+        FloorLevel = 0;
     }
 
     private void AddGardenBedUpgrade()

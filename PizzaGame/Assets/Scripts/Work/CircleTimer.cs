@@ -8,7 +8,7 @@ public class TimerCircle : MonoBehaviour
     public float MaxTime;
     private bool isStop;
 
-    private void Awake()
+    private void OnEnable()
     {
         time = MaxTime;
         image.fillAmount = 1;

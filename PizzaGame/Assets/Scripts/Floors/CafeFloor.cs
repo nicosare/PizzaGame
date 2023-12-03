@@ -1,36 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CafeFloor : Floor
 {
     [SerializeField] private float waitInQueueTimeScale;
+    [SerializeField] private List<GameObject> interior;
 
     protected override void CreateUpgrades()
     {
-        firstUpgrade = new List<Upgrade>
+        FirstUpgrade = new List<(Upgrade upgrade, string upgradeInfo)>
         {
-            CustomersWaitLongerUpgrade,
-            AddRatingUpgrade
+            (CustomersWaitLongerUpgrade, $"Посетители ждут дольше в {waitInQueueTimeScale} раза"),
+            (OpenNewInteriorUpgrade, $"Новый интерьер"),
+            (TakeMoreOrdersUpgrade, $"Количество активных заказов: {OrderController.Instance.MaxAmountOfOrders + 1}"),
+            (AddRatingUpgrade, $"Рейтинг + {ratingAmount}")
         };
-        secondUpgrade = new List<Upgrade>
+        SecondUpgrade = new List<(Upgrade upgrade, string upgradeInfo)>
         {
-            CustomersWaitLongerUpgrade,
-            AddRatingUpgrade
+            (CustomersWaitLongerUpgrade, $"Посетители ждут дольше в {waitInQueueTimeScale} раза"),
+            (OpenNewInteriorUpgrade, $"Новый интерьер"),
+            (TakeMoreOrdersUpgrade, $"Количество активных заказов: {OrderController.Instance.MaxAmountOfOrders + 2}"),
+            (AddRatingUpgrade, $"Рейтинг + {ratingAmount*ratingUpScale}")
         };
-        thirdUpgrade = new List<Upgrade>
+        ThirdUpgrade = new List<(Upgrade upgrade, string upgradeInfo)>
         {
-            CustomersWaitLongerUpgrade,
-            AddRatingUpgrade
+            (CustomersWaitLongerUpgrade, $"Посетители ждут дольше в {waitInQueueTimeScale} раза"),
+            (OpenNewInteriorUpgrade, $"Новый интерьер"),
+            (TakeMoreOrdersUpgrade, $"Количество активных заказов: {OrderController.Instance.MaxAmountOfOrders + 3}"),
+            (AddRatingUpgrade, $"Рейтинг + {ratingAmount*ratingUpScale*ratingUpScale}")
         };
     }
 
     protected override void SetLevel()
     {
-        floorLevel = 1;
+        FloorLevel = 0;
     }
+
     private void CustomersWaitLongerUpgrade()
     {
         CustomersManager.Instance.WaitInQueueScale *= waitInQueueTimeScale;
+    }
+
+    private void OpenNewInteriorUpgrade()
+    {
+        //TODO Добавить интерьер, который будет открываться
+        foreach (var obj in interior.Take(interior.Count * FloorLevel / 3))
+            obj.SetActive(true);
+    }
+
+    private void TakeMoreOrdersUpgrade()
+    {
+        OrderController.Instance.MaxAmountOfOrders++;
     }
 }

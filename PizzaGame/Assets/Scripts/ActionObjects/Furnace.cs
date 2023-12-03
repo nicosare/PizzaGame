@@ -10,6 +10,7 @@ public class Furnace : ActionObject
     [SerializeField] private float cookingTime;
     [SerializeField] private TimerCircle timer;
     [SerializeField] private Sprite takePizzaIcon;
+    public float TimeScaleToCook = 1;
     public override Type typeOfNeededItem => throw new NotImplementedException();
 
     private void Awake()
@@ -28,7 +29,10 @@ public class Furnace : ActionObject
 
     public override void Interact()
     {
-        TaskManager.Instance.CreateTask(TaskGive, this, CookedInventoryObject, 1, true);
+        if (!TaskManager.Instance.BlockCreateTask)
+            TaskManager.Instance.CreateTask(TaskGive, this, CookedInventoryObject, 1, true);
+        else
+            OpenButton(spawnPosition, takePizzaIcon);
     }
 
     public override void ItemDownCast()
@@ -40,13 +44,28 @@ public class Furnace : ActionObject
     {
         if (CookedInventoryObject == null)
         {
-            Debug.Log(OrderController.Instance.ActiveOrder);
-            CookedInventoryObject = OrderController.Instance.ActiveOrder.pizza;
+            if (OrderController.Instance.FirstActiveOrder != null)
+            {
+                if (OrderController.Instance.SecondActiveOrder == null)
+                {
+                    Debug.Log(OrderController.Instance.FirstActiveOrder);
+                    CookedInventoryObject = OrderController.Instance.FirstActiveOrder.pizza;
+                }
+                else
+                    CookedInventoryObject = OrderController.Instance.SecondActiveOrder.pizza;
+            }
+            SetTimerTime();
             timer.gameObject.SetActive(true);
         }
         else
         {
-            TaskManager.Instance.CreateTask(TaskTake, OrderController.Instance.ActiveOrder.customer, CookedInventoryObject, 1, true);
+            if (OrderController.Instance.FirstActiveOrder != null)
+            {
+                if (OrderController.Instance.SecondActiveOrder == null)
+                    TaskManager.Instance.CreateTask(TaskTake, OrderController.Instance.FirstActiveOrder.customer, CookedInventoryObject, 1, true);
+                else
+                    TaskManager.Instance.CreateTask(TaskTake, OrderController.Instance.SecondActiveOrder.customer, CookedInventoryObject, 1, true);
+            }
         }
     }
 
@@ -54,5 +73,10 @@ public class Furnace : ActionObject
     {
         timer.gameObject.SetActive(false);
         OpenButton(spawnPosition, takePizzaIcon);
+    }
+
+    public void SetTimerTime()
+    {
+        timer.MaxTime = cookingTime / TimeScaleToCook;
     }
 }

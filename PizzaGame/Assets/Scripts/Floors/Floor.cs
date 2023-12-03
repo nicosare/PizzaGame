@@ -4,51 +4,57 @@ using UnityEngine;
 
 public abstract class Floor : MonoBehaviour
 {
-    [SerializeField] private int ratingAmount;
-    protected int floorLevel;
-    protected delegate void Upgrade();
-    protected List<Upgrade> firstUpgrade;
-    protected List<Upgrade> secondUpgrade;
-    protected List<Upgrade> thirdUpgrade;
-    private List<List<Upgrade>> upgrades;
+    [SerializeField] private UpgradeFloorWindow window;
+    [SerializeField] protected int ratingAmount;
+    [SerializeField] protected int ratingUpScale;
+    public int FloorLevel;
+    public delegate void Upgrade();
+    public List<(Upgrade upgrade, string upgradeInfo)> FirstUpgrade;
+    public List<(Upgrade upgrade, string upgradeInfo)> SecondUpgrade;
+    public List<(Upgrade upgrade, string upgradeInfo)> ThirdUpgrade;
+    public List<List<(Upgrade upgrade, string upgradeInfo)>> Upgrades;
 
     protected abstract void CreateUpgrades();
     protected abstract void SetLevel();
 
     private void Awake()
     {
+        window.SetButtonStatus(FloorLevel);
         SetLevel();
         CreateUpgrades();
     }
 
     private void Start()
     {
-        upgrades = new List<List<Upgrade>>() { firstUpgrade, secondUpgrade, thirdUpgrade };
-        if (floorLevel > 0)
+        Upgrades = new List<List<(Upgrade upgrade, string upgradeInfo)>>() { FirstUpgrade, SecondUpgrade, ThirdUpgrade };
+        if (FloorLevel > 0)
             LoadUpgrades();
     }
 
     private void LoadUpgrades()
     {
-        for (var i = 0; i < floorLevel; i++)
+        for (var i = 0; i < FloorLevel; i++)
         {
-            foreach (var upgrade in upgrades[i])
-                upgrade.Invoke();
+            foreach (var upgrade in Upgrades[i])
+                upgrade.upgrade.Invoke();
         }
     }
 
     public void UpgradeFloor()
     {
-        if (floorLevel < upgrades.Count)
+        if (FloorLevel < Upgrades.Count)
         {
-            foreach (var upgrade in upgrades[floorLevel])
-                upgrade.Invoke();
-            floorLevel++;
+            foreach (var upgrade in Upgrades[FloorLevel])
+                upgrade.upgrade.Invoke();
+            FloorLevel++;
+            for (var i = 0; i < 3; i++)
+                window.SetButtonStatus(i);
         }
     }
 
     protected void AddRatingUpgrade()
     {
         RatingManager.Instance.AddRating(ratingAmount);
+        ratingAmount *= ratingUpScale;
     }
 }

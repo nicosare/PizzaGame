@@ -68,7 +68,11 @@ public partial class Customer : ActionObject
                 takeOrderButton.gameObject.SetActive(true);
         }
 
-        if (actionButton != null && OrderController.Instance.ActiveOrder != null && OrderController.Instance.ActiveOrder.customer == this)
+        if (actionButton != null
+            && OrderController.Instance.FirstActiveOrder != null
+            && OrderController.Instance.FirstActiveOrder.customer == this
+            || OrderController.Instance.SecondActiveOrder != null
+            && OrderController.Instance.SecondActiveOrder.customer == this)
             actionButton.gameObject.SetActive(false);
     }
 
@@ -177,7 +181,13 @@ public partial class Customer : ActionObject
         else if (currentStage == CustomerStage.WaitOrder)
         {
             CurrentStage = currentStage = CustomerStage.Quit;
-            OrderController.Instance.ActiveOrder = null;
+            if (OrderController.Instance.FirstActiveOrder != null)
+            {
+                if (OrderController.Instance.SecondActiveOrder == null)
+                    OrderController.Instance.FirstActiveOrder = null;
+                else
+                    OrderController.Instance.SecondActiveOrder = null;
+            }
         }
     }
 

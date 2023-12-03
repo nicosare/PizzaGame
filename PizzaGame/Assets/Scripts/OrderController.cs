@@ -8,11 +8,13 @@ public class OrderController : MonoBehaviour
     public static OrderController Instance;
     public List<Order> Orders;
     public int MaxAmountOfOrders;
-    public Order ActiveOrder;
+    public Order FirstActiveOrder;
+    public Order SecondActiveOrder;
 
     private void Awake()
     {
-        ActiveOrder = null;
+        SecondActiveOrder = null;
+        FirstActiveOrder = null;
         Orders = new List<Order>();
         Instance = this;
     }

@@ -31,10 +31,13 @@ public class CameraControl : MonoBehaviour
 
     public void Update()
     {
-        if (SystemInfo.deviceType != DeviceType.Handheld)
-            DesktopMoving();
-        else
-            MobileMoving();
+        if (zoom.CanMove)
+        {
+            if (SystemInfo.deviceType != DeviceType.Handheld)
+                DesktopMoving();
+            else
+                MobileMoving();
+        }
     }
 
     private void DesktopMoving()
