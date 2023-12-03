@@ -20,6 +20,7 @@ public class Zoom : MonoBehaviour
     private float distanceBtwTouchDirections;
     private float zoom;
     private CameraControl cameraControl;
+    public bool CanMove;
 
     private void Awake()
     {
@@ -28,10 +29,13 @@ public class Zoom : MonoBehaviour
 
     private void Update()
     {
-        if (SystemInfo.deviceType != DeviceType.Handheld)
-            DesktopControl();
-        else
-            MobileControl();
+        if (CanMove)
+        {
+            if (SystemInfo.deviceType != DeviceType.Handheld)
+                DesktopControl();
+            else
+                MobileControl();
+        }
     }
 
     private void DesktopControl()

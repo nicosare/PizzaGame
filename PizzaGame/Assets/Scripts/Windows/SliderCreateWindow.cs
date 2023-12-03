@@ -68,6 +68,7 @@ public class SliderCreateWindow : Window
     public void Cook()
     {
         TaskManager.Instance.CreateTask(ActionObjectCallBack.TaskCook, ActionObjectCallBack, ActionObjectCallBack.CookedInventoryObject, (int)slider.value);
+        WindowsController.Instance.CloseWindow(this);
     }
 
     public override void StartAction(ActionObject actionObject)

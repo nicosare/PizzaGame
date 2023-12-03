@@ -6,12 +6,15 @@ using UnityEngine;
 
 public class WindowsController : MonoBehaviour
 {
+    [SerializeField] private Zoom cameraControl;
     public List<Window> windowsList;
     public Window PizzaWindow;
     public Window FullInventoryWindow;
+    public List<Window> UpgradeWindows;
     public static WindowsController Instance;
     private void Awake()
     {
+        cameraControl.CanMove = true;
         Instance = this;
         for (int i = 0; i < transform.childCount; i++)
             windowsList.Add(transform.GetChild(i).GetComponent<Window>());
@@ -22,9 +25,16 @@ public class WindowsController : MonoBehaviour
     {
         if (windowsList.All(win => !win.gameObject.activeSelf))
             OpenWindow(windowsList[0]);
+    }
 
-        if (Input.GetKeyDown(KeyCode.E))
-            OpenWindow(FullInventoryWindow);
+    public void InventoryButton()
+    {
+        OpenWindow(FullInventoryWindow);
+    }
+
+    public void UpgradeButton(int floorIndex)
+    {
+        OpenWindow(UpgradeWindows[floorIndex]);
     }
 
     public void CloseOtherWindows(Window activeWindow)
@@ -60,16 +70,22 @@ public class WindowsController : MonoBehaviour
                 window.StartAction(actionObject);
             }
         }
+
+        if (window.StopCameraMoving)
+            cameraControl.CanMove = false;
+
     }
 
     public void CloseWindow(Window window)
     {
+        cameraControl.CanMove = true;
         OpenWindow(windowsList[0]);
         window.CloseWindow();
         windowsList[1].gameObject.SetActive(false);
     }
     public void CloseWindow(int windowIndex)
     {
+        cameraControl.CanMove = true;
         OpenWindow(windowsList[0]);
         windowsList[windowIndex].CloseWindow();
         windowsList[1].gameObject.SetActive(false);
@@ -77,6 +93,7 @@ public class WindowsController : MonoBehaviour
 
     public void CancelOtherWindows()
     {
+        cameraControl.CanMove = true;
         foreach (var window in windowsList)
             if (!window.Equals(windowsList[1]))
                 window.CancelWindow();

@@ -14,6 +14,8 @@ public class GardenBed : ActionObject
     private Seed seed;
     private MeshFilter sproutMesh;
     public override Type typeOfNeededItem => typeof(Seed);
+    public float TimeScaleToGrow = 1;
+    public int bonusIngredientCount;
 
     private void Awake()
     {
@@ -31,7 +33,8 @@ public class GardenBed : ActionObject
 
     private void Harvest()
     {
-        TaskManager.Instance.CreateTask(TaskGive, this, seed.Ingredient, seed.AmountOfIngredients());
+        var actualAmount = seed.AmountOfIngredients() + bonusIngredientCount;
+        TaskManager.Instance.CreateTask(TaskGive, this, seed.Ingredient, actualAmount);
     }
 
     private void OpenInventoryWithSeeds()
@@ -75,15 +78,16 @@ public class GardenBed : ActionObject
 
     private IEnumerator Growing()
     {
+        var actualGrowTime = seed.TimeToGrow / TimeScaleToGrow;
         isPlantSeeded = true;
         plantName.text = seed.Ingredient.nameOfObject;
         sproutMesh = Instantiate(seed.MeshFilters[0], transform);
-        yield return new WaitForSeconds(seed.TimeToGrow / seed.MeshFilters.Length);
+        yield return new WaitForSeconds(actualGrowTime / seed.MeshFilters.Length);
         for (var i = 1; i < seed.MeshFilters.Length; i++)
         {
             Destroy(sproutMesh.gameObject);
             sproutMesh = Instantiate(seed.MeshFilters[i], transform);
-            yield return new WaitForSeconds(seed.TimeToGrow / seed.MeshFilters.Length);
+            yield return new WaitForSeconds(actualGrowTime / seed.MeshFilters.Length);
         }
 
         OpenButton(spawnPosition, harvestIcon);

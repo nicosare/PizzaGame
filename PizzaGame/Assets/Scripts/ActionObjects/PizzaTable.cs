@@ -37,7 +37,11 @@ public class PizzaTable : ActionObject
     public override void StartAction()
     {
         Pizzas.Remove((Pizza)CookedInventoryObject);
-        var freeFurnace = furnaces.Where(furnace => furnace.CookedInventoryObject == null && furnace.gameObject.activeSelf).First();
-        TaskManager.Instance.CreateTask(TaskTake, freeFurnace, CookedInventoryObject, 1, true);
+        TaskManager.Instance.CreateTask(TaskTake, GetFreeFurnaces().First(), CookedInventoryObject, 1, true);
+    }
+
+    public List<Furnace> GetFreeFurnaces()
+    {
+        return furnaces.Where(furnace => furnace.CookedInventoryObject == null && furnace.gameObject.activeInHierarchy).ToList();
     }
 }

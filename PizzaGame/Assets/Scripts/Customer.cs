@@ -12,9 +12,9 @@ public partial class Customer : ActionObject
 {
     [SerializeField] private TimerCircle timer;
     [SerializeField] private ActionButtonCanvas takeOrderButton;
-    [SerializeField] private float waitingQueueTime;
     [SerializeField] private Sprite cancelOrderIcon;
     [SerializeField] private Transform customerUI;
+    public float WaitingQueueTime;
     public TextMeshProUGUI CustomerName;
     private CustomersManager customersManager;
     private Moving moving;
@@ -44,7 +44,6 @@ public partial class Customer : ActionObject
             GoToSittingPlace,
             WaitOrder
         };
-        timer.MaxTime = waitingQueueTime;
         timer.gameObject.SetActive(false);
         takeOrderButton.gameObject.SetActive(false);
         moving = GetComponent<Moving>();
@@ -69,7 +68,11 @@ public partial class Customer : ActionObject
                 takeOrderButton.gameObject.SetActive(true);
         }
 
-        if (actionButton != null && OrderController.Instance.ActiveOrder != null && OrderController.Instance.ActiveOrder.customer == this)
+        if (actionButton != null
+            && OrderController.Instance.FirstActiveOrder != null
+            && OrderController.Instance.FirstActiveOrder.customer == this
+            || OrderController.Instance.SecondActiveOrder != null
+            && OrderController.Instance.SecondActiveOrder.customer == this)
             actionButton.gameObject.SetActive(false);
     }
 
@@ -94,6 +97,7 @@ public partial class Customer : ActionObject
 
     private void WaitOrderAcceptance()
     {
+        timer.MaxTime = WaitingQueueTime;
         timer.gameObject.SetActive(true);
         takeOrderButton.gameObject.SetActive(true);
     }
@@ -150,7 +154,6 @@ public partial class Customer : ActionObject
 
     private CustomerStage SetStage()
     {
-        Debug.Log(currentStage);
         actions[(int)currentStage].Invoke();
         return CurrentStage;
     }
@@ -178,7 +181,13 @@ public partial class Customer : ActionObject
         else if (currentStage == CustomerStage.WaitOrder)
         {
             CurrentStage = currentStage = CustomerStage.Quit;
-            OrderController.Instance.ActiveOrder = null;
+            if (OrderController.Instance.FirstActiveOrder != null)
+            {
+                if (OrderController.Instance.SecondActiveOrder == null)
+                    OrderController.Instance.FirstActiveOrder = null;
+                else
+                    OrderController.Instance.SecondActiveOrder = null;
+            }
         }
     }
 

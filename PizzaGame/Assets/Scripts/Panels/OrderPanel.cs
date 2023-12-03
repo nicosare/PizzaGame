@@ -35,14 +35,27 @@ public class OrderPanel : MonoBehaviour
     public void TakeOrder()
     {
         var window = transform.parent.parent.GetComponent<OrdersWindow>();
-        if (OrderController.Instance.ActiveOrder == null)
+        if (!TaskManager.Instance.BlockCreateTask && window.ActionObjectCallBack.GetComponent<PizzaTable>().GetFreeFurnaces().Count > 0)
         {
-            OrderController.Instance.ActiveOrder = order;
-            OrderController.Instance.Orders.Remove(order);
-            window.ActionObjectCallBack.CookedInventoryObject = order.pizza;
-            Debug.Log(order.ToString());
-            TaskManager.Instance.CreateTask(window.ActionObjectCallBack.TaskCook, window.ActionObjectCallBack, order.pizza, 1, true);
-            WindowsController.Instance.CloseWindow(window);
+            if (OrderController.Instance.FirstActiveOrder == null)
+            {
+                OrderController.Instance.FirstActiveOrder = order;
+                OrderController.Instance.Orders.Remove(order);
+                window.ActionObjectCallBack.CookedInventoryObject = order.pizza;
+                Debug.Log(order.ToString());
+                TaskManager.Instance.CreateTask(window.ActionObjectCallBack.TaskCook, window.ActionObjectCallBack, order.pizza, 1, true);
+                WindowsController.Instance.CloseWindow(window);
+            }
+            else if (OrderController.Instance.SecondActiveOrder == null)
+            {
+                OrderController.Instance.SecondActiveOrder = order;
+                OrderController.Instance.Orders.Remove(order);
+                window.ActionObjectCallBack.CookedInventoryObject = order.pizza;
+                Debug.Log(order.ToString());
+                TaskManager.Instance.CreateTask(window.ActionObjectCallBack.TaskCook, window.ActionObjectCallBack, order.pizza, 1, true);
+                WindowsController.Instance.CloseWindow(window);
+
+            }
         }
         else
         {

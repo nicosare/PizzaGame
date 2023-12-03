@@ -12,13 +12,7 @@ public class TaskManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-            Destroy(gameObject);
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        Instance = this;
     }
 
     public Guid CreateTask(Task task, Vector3 targetPosition, bool isTaskIrrevocable = false)

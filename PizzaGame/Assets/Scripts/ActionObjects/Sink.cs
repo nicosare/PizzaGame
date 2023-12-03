@@ -10,8 +10,8 @@ public class Sink : ActionObject
     [SerializeField] private Sprite takeWaterIcon;
     [SerializeField] private InventoryObject water;
     [SerializeField] private TextMeshProUGUI waterCountText;
-    [SerializeField] private int maxCountWater;
-    [SerializeField] private float fillSpeed;
+    public int MaxCountWater;
+    public float FillSpeed;
     private Guid taskUID;
 
     private void Awake()
@@ -34,7 +34,7 @@ public class Sink : ActionObject
     {
         if (!TaskManager.Instance.BlockCreateTask)
         {
-            if (Inventory.Instance.GetAmountOfObject(water) < maxCountWater)
+            if (Inventory.Instance.GetAmountOfObject(water) < MaxCountWater)
             {
                 waterCountText.gameObject.SetActive(true);
                 ChangeWaterCounter();
@@ -53,10 +53,10 @@ public class Sink : ActionObject
     private IEnumerator Filling()
     {
         ChangeWaterCounter();
-        while (Inventory.Instance.GetAmountOfObject(water) < maxCountWater)
+        while (Inventory.Instance.GetAmountOfObject(water) < MaxCountWater)
         {
             ChangeWaterCounter();
-            yield return new WaitForSeconds(1 / fillSpeed);
+            yield return new WaitForSeconds(1 / FillSpeed);
             if (!TaskManager.Instance.CheckActualTask(taskUID))
                 break;
             Give(water, 1);
@@ -77,8 +77,8 @@ public class Sink : ActionObject
 
     private void ChangeWaterCounter()
     {
-        if (Inventory.Instance.GetAmountOfObject(water) < maxCountWater)
-            waterCountText.text = $"{Inventory.Instance.GetAmountOfObject(water)}/{maxCountWater}ë";
+        if (Inventory.Instance.GetAmountOfObject(water) < MaxCountWater)
+            waterCountText.text = $"{Inventory.Instance.GetAmountOfObject(water)}/{MaxCountWater}ë";
         else
             StartCoroutine(ShowCountInSeconds(1));
     }
@@ -86,7 +86,7 @@ public class Sink : ActionObject
     private IEnumerator ShowCountInSeconds(float seconds)
     {
         waterCountText.gameObject.SetActive(true);
-        waterCountText.text = $"{Inventory.Instance.GetAmountOfObject(water)}/{maxCountWater}ë";
+        waterCountText.text = $"{Inventory.Instance.GetAmountOfObject(water)}/{MaxCountWater}ë";
         yield return new WaitForSeconds(seconds);
         waterCountText.gameObject.SetActive(false);
     }
