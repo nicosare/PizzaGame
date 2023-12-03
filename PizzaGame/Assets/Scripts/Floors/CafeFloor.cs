@@ -14,21 +14,21 @@ public class CafeFloor : Floor
         {
             (CustomersWaitLongerUpgrade, $"Посетители ждут дольше в {waitInQueueTimeScale} раза"),
             (OpenNewInteriorUpgrade, $"Новый интерьер"),
-            (TakeMoreOrdersUpgrade, $"Количество активных заказов: {OrderController.Instance.MaxAmountOfOrders + 1}"),
+            (TakeMoreOrdersUpgrade, $"Количество возможных активных заказов: {OrderController.Instance.MaxAmountOfOrders + 1}"),
             (AddRatingUpgrade, $"Рейтинг + {ratingAmount}")
         };
         SecondUpgrade = new List<(Upgrade upgrade, string upgradeInfo)>
         {
-            (CustomersWaitLongerUpgrade, $"Посетители ждут дольше в {waitInQueueTimeScale} раза"),
+            (CustomersWaitLongerUpgrade, $"Посетители ждут дольше в {waitInQueueTimeScale*waitInQueueTimeScale} раза"),
             (OpenNewInteriorUpgrade, $"Новый интерьер"),
-            (TakeMoreOrdersUpgrade, $"Количество активных заказов: {OrderController.Instance.MaxAmountOfOrders + 2}"),
+            (TakeMoreOrdersUpgrade, $"Количество возможных активных заказов: {OrderController.Instance.MaxAmountOfOrders + 2}"),
             (AddRatingUpgrade, $"Рейтинг + {ratingAmount*ratingUpScale}")
         };
         ThirdUpgrade = new List<(Upgrade upgrade, string upgradeInfo)>
         {
-            (CustomersWaitLongerUpgrade, $"Посетители ждут дольше в {waitInQueueTimeScale} раза"),
+            (CustomersWaitLongerUpgrade, $"Посетители ждут дольше в {waitInQueueTimeScale*waitInQueueTimeScale*waitInQueueTimeScale} раза"),
             (OpenNewInteriorUpgrade, $"Новый интерьер"),
-            (TakeMoreOrdersUpgrade, $"Количество активных заказов: {OrderController.Instance.MaxAmountOfOrders + 3}"),
+            (TakeMoreOrdersUpgrade, $"Количество возможных активных заказов: {OrderController.Instance.MaxAmountOfOrders + 3}"),
             (AddRatingUpgrade, $"Рейтинг + {ratingAmount*ratingUpScale*ratingUpScale}")
         };
     }
