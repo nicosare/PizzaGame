@@ -49,10 +49,10 @@ public class Furnace : ActionObject
                 if (OrderController.Instance.SecondActiveOrder == null)
                 {
                     Debug.Log(OrderController.Instance.FirstActiveOrder);
-                    CookedInventoryObject = OrderController.Instance.FirstActiveOrder.pizza;
+                    CookedInventoryObject = OrderController.Instance.FirstActiveOrder.Pizza;
                 }
                 else
-                    CookedInventoryObject = OrderController.Instance.SecondActiveOrder.pizza;
+                    CookedInventoryObject = OrderController.Instance.SecondActiveOrder.Pizza;
             }
             SetTimerTime();
             timer.gameObject.SetActive(true);
@@ -62,9 +62,9 @@ public class Furnace : ActionObject
             if (OrderController.Instance.FirstActiveOrder != null)
             {
                 if (OrderController.Instance.SecondActiveOrder == null)
-                    TaskManager.Instance.CreateTask(TaskTake, OrderController.Instance.FirstActiveOrder.customer, CookedInventoryObject, 1, true);
+                    TaskManager.Instance.CreateTask(TaskTake, OrderController.Instance.FirstActiveOrder.Customer, CookedInventoryObject, 1, true);
                 else
-                    TaskManager.Instance.CreateTask(TaskTake, OrderController.Instance.SecondActiveOrder.customer, CookedInventoryObject, 1, true);
+                    TaskManager.Instance.CreateTask(TaskTake, OrderController.Instance.SecondActiveOrder.Customer, CookedInventoryObject, 1, true);
             }
         }
     }

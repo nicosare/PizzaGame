@@ -24,7 +24,9 @@ public class TaskManager : MonoBehaviour
             this.task = Instantiate(task, transform);
             this.task.Do(targetPosition);
         }
-        return actualTaskUID = Guid.NewGuid();
+        var guid = Guid.NewGuid();
+        Debug.Log(guid);
+        return actualTaskUID = guid;
     }
 
     public Guid CreateTask(Task task, ActionObject actionObject, InventoryObject inventoryObject, int amount = 1, bool isTaskIrrevocable = false)
@@ -39,7 +41,9 @@ public class TaskManager : MonoBehaviour
         }
         else
             CancelTasK(actionObject);
-        return actualTaskUID = Guid.NewGuid();
+        var guid = Guid.NewGuid();
+        Debug.Log(guid);
+        return actualTaskUID = guid;
     }
 
     private void CancelTasK(ActionObject actionObject)

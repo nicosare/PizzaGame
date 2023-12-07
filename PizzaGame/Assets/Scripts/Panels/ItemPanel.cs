@@ -18,7 +18,7 @@ public class ItemPanel : MonoBehaviour
 
     private void Start()
     {
-        inventoryWindow = transform.parent.parent.GetComponent<Window>();
+        inventoryWindow = transform.GetComponentInParent<Window>();
     }
 
     public void FillData(InventoryObject item, int amount)

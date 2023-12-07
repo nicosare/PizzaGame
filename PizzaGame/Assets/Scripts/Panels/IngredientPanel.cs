@@ -6,17 +6,21 @@ using UnityEngine.UI;
 
 public class IngredientPanel : MonoBehaviour
 {
-    [SerializeField] private Image icon;
-    [SerializeField] private TextMeshProUGUI nameAndAmountOfIngredient;
-
+    [SerializeField] private TextMeshProUGUI nameOfIngredient;
+    [SerializeField] private TextMeshProUGUI needAmountText;
+    [SerializeField] private TextMeshProUGUI amountText;
+    [SerializeField] private List<Sprite> sprites;
+    [SerializeField] private List<Image> panels;
     public void LoadData(Ingredient ingredient)
     {
-        icon.sprite = ingredient.Icon;
+        nameOfIngredient.text = ingredient.nameOfObject;
         var amount = Inventory.Instance.GetAmountOfObject(ingredient);
-        nameAndAmountOfIngredient.text = $"{ingredient.nameOfObject}";
+        amountText.text = amount.ToString();
         if (amount > 0)
-            nameAndAmountOfIngredient.color = Color.green;
+            foreach (var panel in panels)
+                panel.sprite = sprites[0];
         else
-            nameAndAmountOfIngredient.color = Color.red;
+            foreach (var panel in panels)
+                panel.sprite = sprites[1];
     }
 }

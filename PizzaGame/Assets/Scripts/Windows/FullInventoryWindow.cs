@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,21 @@ public class FullInventoryWindow : Window
     [SerializeField] private List<Button> buttons;
     [SerializeField] private Sprite selectedButtonImage;
     [SerializeField] private Sprite buttonImage;
+
     public override void StartAction(ActionObject actionObject)
     {
-        ShowFullInventory();
-        buttons[0].image.sprite = selectedButtonImage;
+        if (actionObject != null)
+            ActionObjectCallBack = actionObject;
+        if (actionObject is GardenBed)
+        {
+            ShowOnly(actionObject.typeOfNeededItem);
+            buttons[2].image.sprite = selectedButtonImage;
+        }
+        else
+        {
+            ShowFullInventory();
+            buttons[0].image.sprite = selectedButtonImage;
+        }
     }
 
     public void ShowFullInventory()
@@ -28,7 +40,41 @@ public class FullInventoryWindow : Window
         {
             var newItemPanel = Instantiate(itemPanel, windowField.transform);
             newItemPanel.FillData(item.Key, item.Value);
-            newItemPanel.GetComponent<Button>().interactable = false;
+
+            if (ActionObjectCallBack != null)
+                newItemPanel.ActionObjectCallBack = ActionObjectCallBack;
+
+            if (ActionObjectCallBack != null)
+            {
+                if (item.Key.GetType() == ActionObjectCallBack.typeOfNeededItem)
+                    newItemPanel.GetComponent<Button>().interactable = true;
+                else
+                    newItemPanel.GetComponent<Button>().interactable = false;
+            }
+            else
+                newItemPanel.GetComponent<Button>().interactable = false;
+        }
+    }
+
+    private void ShowOnly(Type type)
+    {
+        SetButtonSprite();
+        foreach (Transform item in windowField.transform)
+            Destroy(item.gameObject);
+
+        var allItems = Inventory.Instance.GetSortedItemsByAmount()
+            .Where(item => item.Key.GetType() == type);
+        if (allItems.Any())
+            foreach (var item in allItems)
+            {
+                var newItemPanel = Instantiate(itemPanel, windowField.transform);
+                newItemPanel.FillData(item.Key, item.Value);
+                newItemPanel.GetComponent<Button>().interactable = true;
+                newItemPanel.ActionObjectCallBack = ActionObjectCallBack;
+            }
+        else
+        {
+            Debug.Log("Empty!");
         }
     }
 
@@ -45,7 +91,17 @@ public class FullInventoryWindow : Window
             {
                 var newItemPanel = Instantiate(itemPanel, windowField.transform);
                 newItemPanel.FillData(item.Key, item.Value);
-                newItemPanel.GetComponent<Button>().interactable = false;
+                if (ActionObjectCallBack != null)
+                    newItemPanel.ActionObjectCallBack = ActionObjectCallBack;
+                if (ActionObjectCallBack != null)
+                {
+                    if (item.Key.GetType() == ActionObjectCallBack.typeOfNeededItem)
+                        newItemPanel.GetComponent<Button>().interactable = true;
+                    else
+                        newItemPanel.GetComponent<Button>().interactable = false;
+                }
+                else
+                    newItemPanel.GetComponent<Button>().interactable = false;
             }
         else
         {
@@ -72,6 +128,7 @@ public class FullInventoryWindow : Window
             foreach (Transform item in windowField.transform)
                 Destroy(item.gameObject);
             gameObject.SetActive(false);
+            ActionObjectCallBack = null;
         }
     }
 }

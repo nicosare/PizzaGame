@@ -14,32 +14,40 @@ public class UpgradeFloorWindow : Window
     {
         for (var i = 0; i < 3; i++)
         {
-            upgradePanels[i].LoadData(i, floor.Upgrades[i]);
             SetButtonStatus(i);
+            upgradePanels[i].LoadData(i, floor.Upgrades[i]);
         }
     }
 
     public void SetButtonStatus(int buttonIndex)
     {
+        var upgradePanel = upgradePanels[buttonIndex];
         if (buttonIndex < floor.FloorLevel)
         {
-            upgradePanels[buttonIndex].CostPanel.SetActive(false);
-            upgradePanels[buttonIndex].UpgradeButton.GetComponentInChildren<TextMeshProUGUI>().text = "Улучшено";
-            upgradePanels[buttonIndex].UpgradeButton.enabled = false;
-            upgradePanels[buttonIndex].UpgradeButton.GetComponent<Image>().color = new Color(0, 1, 0, .4f);
+            upgradePanel.CostPanel.SetActive(false);
+            upgradePanel.UpgradeButton.GetComponentInChildren<TextMeshProUGUI>().text = "Улучшено";
+            upgradePanel.UpgradeButton.enabled = false;
+            upgradePanel.UpgradeButton.GetComponent<Image>().color = new Color(0, 1, 0, .4f);
         }
         else if (buttonIndex == floor.FloorLevel)
         {
-            upgradePanels[buttonIndex].UpgradeButton.GetComponentInChildren<TextMeshProUGUI>().text = "Повысить";
-            upgradePanels[buttonIndex].UpgradeButton.enabled = true;
-            upgradePanels[buttonIndex].UpgradeButton.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            upgradePanel.UpgradeButton.GetComponentInChildren<TextMeshProUGUI>().text = "Повысить";
+            Debug.Log(MoneyManager.Instance.GetBalance());
+            if (MoneyManager.Instance.GetBalance() >= upgradePanel.Cost)
+                upgradePanel.UpgradeButton.enabled = true;
+            else
+            {
+                upgradePanel.UpgradeButton.GetComponentInChildren<TextMeshProUGUI>().text = "Недостаточно денег";
+                upgradePanel.UpgradeButton.enabled = false;
+                upgradePanel.UpgradeButton.GetComponent<Image>().color = new Color(1, 0, 0, .4f);
+            }
+            upgradePanel.UpgradeButton.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         }
         else
         {
-            upgradePanels[buttonIndex].UpgradeButton.GetComponentInChildren<TextMeshProUGUI>().text = "Недоступно";
-            upgradePanels[buttonIndex].UpgradeButton.enabled = false;
-
-            upgradePanels[buttonIndex].UpgradeButton.GetComponent<Image>().color = new Color(1, 0, 0, .4f);
+            upgradePanel.UpgradeButton.GetComponentInChildren<TextMeshProUGUI>().text = "Недоступно";
+            upgradePanel.UpgradeButton.enabled = false;
+            upgradePanel.UpgradeButton.GetComponent<Image>().color = new Color(1, 0, 0, .4f);
         }
     }
 

@@ -4,29 +4,38 @@ using UnityEngine;
 
 public class Order
 {
-    public Pizza pizza;
-    public Customer customer;
+    public Pizza Pizza;
+    public Customer Customer;
+    public float Cost;
+    public float Rating;
+    public int PizzaLevel;
 
     public Order()
     {
-        pizza = null;
-        customer = null;
+        Pizza = null;
+        Customer = null;
     }
 
     public Order(Order order)
     {
-        pizza = order.pizza;
-        customer = order.customer;
+        Pizza = order.Pizza;
+        Customer = order.Customer;
+        Cost = order.Cost;
+        Rating = order.Rating;
+        PizzaLevel = order.PizzaLevel;
     }
 
-    public Order(Pizza pizza, Customer customer)
+    public Order(Pizza pizza, Customer customer, float cost, float rating, int pizzaLevel)
     {
-        this.pizza = pizza;
-        this.customer = customer;
+        Pizza = pizza;
+        Customer = customer;
+        Cost = cost;
+        Rating = rating;
+        PizzaLevel = pizzaLevel;
     }
 
     public override string ToString()
     {
-        return $"{pizza}-{customer}";
+        return $"{Pizza}-{Customer}";
     }
 }

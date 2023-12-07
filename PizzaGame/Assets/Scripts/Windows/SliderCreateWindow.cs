@@ -50,7 +50,7 @@ public class SliderCreateWindow : Window
         for (var i = 0; i < takePanels.Count; i++)
         {
             takePanels[i].CountText.text = $"{slider.value}/{Inventory.Instance.GetAmountOfObject(ingredients[i])}";
-            if (Inventory.Instance.GetAmountOfObject(ingredients[i]) == 0)
+            if (slider.value == 0)
                 cookButton.enabled = false;
             else
                 cookButton.enabled = true;

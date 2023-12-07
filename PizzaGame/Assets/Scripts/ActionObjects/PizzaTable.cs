@@ -24,9 +24,18 @@ public class PizzaTable : ActionObject
 
     public override void Interact()
     {
-        foreach (var order in OrderController.Instance.Orders)
-            Pizzas.Add(order.pizza);
-        WindowsController.Instance.OpenWindow(window, this);
+        if (OrderController.Instance.Orders.Count > 0)
+        {
+            foreach (var order in OrderController.Instance.Orders)
+                Pizzas.Add(order.Pizza);
+            WindowsController.Instance.OpenWindow(window, this);
+        }
+        else
+        {
+            CancelAction();
+            Message.Instance.LoadMessage("Нет активных заказов!", 1);
+        }
+
     }
 
     public override void ItemDownCast()
