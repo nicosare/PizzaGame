@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class OrdersWindow : Window
@@ -8,7 +9,7 @@ public class OrdersWindow : Window
 
     private void LoadItems()
     {
-        foreach (var order in OrderController.Instance.Orders)
+        foreach (var order in OrderController.Instance.Orders.OrderBy(order => order.PizzaLevel))
         {
             var newPanel = Instantiate(orderPanel, windowField.transform);
             newPanel.LoadData(order);

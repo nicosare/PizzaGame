@@ -14,6 +14,7 @@ public abstract class Window : MonoBehaviour
     public bool OpenFromOtherWindows;
     public bool OpenCancelWindow;
     public bool StopCameraMoving;
+
     private void Update()
     {
         if (closeByEscape && Input.GetKeyDown(KeyCode.Escape))

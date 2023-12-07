@@ -254,7 +254,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2578646291582140337}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8871777684768054453}
+        m_TargetAssemblyTypeName: UpgradePanel, Assembly-CSharp
+        m_MethodName: TakeMoney
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1091728299410231068
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +362,7 @@ MonoBehaviour:
   levelText: {fileID: 2004504652522782469}
   descriptionText: {fileID: 5110671650495830659}
   costText: {fileID: 219657859424637286}
-  cost: 200
+  Cost: 0
   UpgradeButton: {fileID: 6201823287627508972}
   CostPanel: {fileID: 7548653139872976237}
 --- !u!1 &3387010281003076623
@@ -388,7 +400,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 15}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8339016864434565483
 CanvasRenderer:
@@ -792,10 +804,10 @@ RectTransform:
   - {fileID: 5919323591610174715}
   m_Father: {fileID: 292478972295544820}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.65, y: 0.07}
-  m_AnchorMax: {x: 0.65, y: 0.07}
+  m_AnchorMin: {x: 0.5, y: 0.07}
+  m_AnchorMax: {x: 0.5, y: 0.07}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 15}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2214127526681033828
 MonoBehaviour:
@@ -836,7 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
-  m_VerticalFit: 0
+  m_VerticalFit: 1
 --- !u!1 &7576590309596202648
 GameObject:
   m_ObjectHideFlags: 0

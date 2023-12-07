@@ -22,5 +22,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 12dc5dff430869e4399794fb0838f97b, type: 2}
   - {fileID: 11400000, guid: 223ba03a0f83736479f13622336c79a6, type: 2}
   - {fileID: 11400000, guid: 65760fe9b0173d0409dd7581668035cf, type: 2}
-  cost: 0
-  minimalCafeRating: 0
+  Cost: 200
+  MinimalCafeRating: 0

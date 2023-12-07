@@ -140,6 +140,7 @@ MonoBehaviour:
   takeOrderButton: {fileID: 4768955660743856323}
   cancelOrderIcon: {fileID: 21300000, guid: 6b2753b5f945fae4ab7c97c2f8acd138, type: 3}
   customerUI: {fileID: 301679028253924071}
+  minusQuitRating: 20
   WaitingQueueTime: 10
   CustomerName: {fileID: 7988008065159323967}
 --- !u!195 &6943227351495780209

@@ -7,16 +7,13 @@ public class Menu : MonoBehaviour
     public List<Pizza> AvailablePizzas;
     public static Menu Instance;
 
-    //TODO: Перенести рейтинг в скрипт кафе
-    [SerializeField] private float rating;
-
     private void Awake()
     {
         Instance = this;
         
         foreach (var pizza in AllPizzas)
         {
-            if (pizza.minimalCafeRating <= rating)
+            if (pizza.MinimalCafeRating <= RatingManager.Instance.GetRatingValue())
                 AvailablePizzas.Add(pizza);
         }
     }

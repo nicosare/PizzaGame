@@ -8,6 +8,7 @@ public class GardenFloor : Floor
 {
     [SerializeField] private List<GardenBed> gardenBeds;
     [SerializeField] private float gardenBedTimeScale;
+    [SerializeField] private float upChanceToReturnSeeds;
     private int availableGardenBedsCount = 2;
 
     protected override void CreateUpgrades()
@@ -27,7 +28,7 @@ public class GardenFloor : Floor
         {
             (AddGardenBedUpgrade, $"Количество грядок: {availableGardenBedsCount+2}"),
             (SpeedUpGrowTimeUpgrade, $"Семена растут в {gardenBedTimeScale*gardenBedTimeScale} раза быстрее"),
-            (MoreIngredientsUpgrade, $"Больше собираемых ингредиентов"),
+            (UpChanceToReturnSeeds, $"Шанс на возврат семян + {upChanceToReturnSeeds}%"),
             (AddRatingUpgrade, $"Рейтинг + {ratingAmount*ratingUpScale}")
         };
 
@@ -63,5 +64,11 @@ public class GardenFloor : Floor
     {
         foreach (var gardenBed in gardenBeds)
             gardenBed.bonusIngredientCount++;
+    }
+
+    private void UpChanceToReturnSeeds()
+    {
+        foreach (var gardenBed in gardenBeds)
+            gardenBed.ChanceToReturnSeed += upChanceToReturnSeeds;
     }
 }

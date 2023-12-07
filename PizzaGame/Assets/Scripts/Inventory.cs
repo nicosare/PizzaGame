@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     private Dictionary<InventoryObject, int> inventory = new Dictionary<InventoryObject, int>();
     public static Inventory Instance;
     [SerializeField] private List<Window> windows;
-    [SerializeField] private InventoryObject[] testGiveObject;
+    [SerializeField] private List<InventoryObject> testGiveObject;
 
     private void Awake()
     {
@@ -25,9 +25,11 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        foreach (var item in testGiveObject)
+        testGiveObject.Shuffle();
+        for (var i = 0; i < UnityEngine.Random.Range(testGiveObject.Count, testGiveObject.Count); i++)
         {
-            CreateOrAddObject(item, 5);
+
+            CreateOrAddObject(testGiveObject[i], 1);
         }
     }
 
@@ -38,8 +40,11 @@ public class Inventory : MonoBehaviour
         else
             inventory.Add(inventoryObject, amount);
 
+        if (inventoryObject is not Pizza)
+            ShowItemManager.Instance.ShowTakeItem(inventoryObject.Icon, inventoryObject.nameOfObject, amount);
+
         foreach (var window in windows)
-        WindowsController.Instance.UpdateWindow(window);
+            WindowsController.Instance.UpdateWindow(window);
     }
 
     public bool TryTakeOrRemoveObject(InventoryObject inventoryObject, int amount)
@@ -50,9 +55,12 @@ public class Inventory : MonoBehaviour
                 inventory.Remove(inventoryObject);
             else
                 inventory[inventoryObject] -= amount;
-            
+
+            if (inventoryObject is not Pizza)
+                ShowItemManager.Instance.ShowGiveItem(inventoryObject.Icon, inventoryObject.nameOfObject, amount);
+
             foreach (var window in windows)
-            WindowsController.Instance.UpdateWindow(window);
+                WindowsController.Instance.UpdateWindow(window);
 
             return true;
         }

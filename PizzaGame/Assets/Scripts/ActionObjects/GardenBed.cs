@@ -16,6 +16,7 @@ public class GardenBed : ActionObject
     public override Type typeOfNeededItem => typeof(Seed);
     public float TimeScaleToGrow = 1;
     public int bonusIngredientCount;
+    public float ChanceToReturnSeed;
 
     private void Awake()
     {
@@ -52,6 +53,9 @@ public class GardenBed : ActionObject
         }
         else
         {
+            if (UnityEngine.Random.Range(0, 100) < ChanceToReturnSeed)
+                Give(seed, 1);
+
             isPlantSeeded = false;
             DestroyPlant();
         }

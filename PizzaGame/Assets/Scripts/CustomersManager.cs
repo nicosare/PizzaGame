@@ -16,7 +16,7 @@ public class CustomersManager : MonoBehaviour
     public List<Moving> WaitingCustomers;
     private List<Transform> freeSittingPlaces;
     public float WaitInQueueScale;
-    
+
     private void Awake()
     {
         Instance = this;

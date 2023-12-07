@@ -14,6 +14,7 @@ public partial class Customer : ActionObject
     [SerializeField] private ActionButtonCanvas takeOrderButton;
     [SerializeField] private Sprite cancelOrderIcon;
     [SerializeField] private Transform customerUI;
+    [SerializeField] private int minusQuitRating;
     public float WaitingQueueTime;
     public TextMeshProUGUI CustomerName;
     private CustomersManager customersManager;
@@ -70,9 +71,9 @@ public partial class Customer : ActionObject
 
         if (actionButton != null
             && OrderController.Instance.FirstActiveOrder != null
-            && OrderController.Instance.FirstActiveOrder.customer == this
+            && OrderController.Instance.FirstActiveOrder.Customer == this
             || OrderController.Instance.SecondActiveOrder != null
-            && OrderController.Instance.SecondActiveOrder.customer == this)
+            && OrderController.Instance.SecondActiveOrder.Customer == this)
             actionButton.gameObject.SetActive(false);
     }
 
@@ -83,7 +84,7 @@ public partial class Customer : ActionObject
         for (var i = 0; i < 3; i++)
         {
             Pizzas.Add(availableMenu[i]);
-            if (availableMenu.Count < 2)
+            if (availableMenu.Count < 3)
                 break;
         }
     }
@@ -125,7 +126,10 @@ public partial class Customer : ActionObject
         timer.gameObject.SetActive(false);
         takeOrderButton.gameObject.SetActive(false);
         if (customersManager.WaitingCustomers.Contains(GetComponent<Moving>()))
+        {
+            RatingManager.Instance.TakeRating(minusQuitRating);
             customersManager.WaitingCustomers.Remove(GetComponent<Moving>());
+        }
         moving.MoveTo(customersManager.GetQuitPosition());
         StartCoroutine(WaitIsCome());
     }
@@ -169,10 +173,12 @@ public partial class Customer : ActionObject
         if (actionButton != null)
             actionButton.gameObject.SetActive(false);
         CurrentStage = currentStage = CustomerStage.Quit;
-        var order = OrderController.Instance.Orders.Find(order => order.customer = this);
+        var order = OrderController.Instance.Orders.Find(order => order.Customer = this);
+        RatingManager.Instance.TakeRating(minusQuitRating);
         if (order != null)
             OrderController.Instance.Orders.Remove(order);
     }
+
 
     public override void StartAction()
     {
@@ -184,9 +190,17 @@ public partial class Customer : ActionObject
             if (OrderController.Instance.FirstActiveOrder != null)
             {
                 if (OrderController.Instance.SecondActiveOrder == null)
+                {
+                    MoneyManager.Instance.AddMoney((int)OrderController.Instance.FirstActiveOrder.Cost);
+                    RatingManager.Instance.AddRating((int)OrderController.Instance.FirstActiveOrder.Rating);
                     OrderController.Instance.FirstActiveOrder = null;
+                }
                 else
+                {
                     OrderController.Instance.SecondActiveOrder = null;
+                    MoneyManager.Instance.AddMoney((int)OrderController.Instance.SecondActiveOrder.Cost);
+                    RatingManager.Instance.AddRating((int)OrderController.Instance.SecondActiveOrder.Rating);
+                }
             }
         }
     }

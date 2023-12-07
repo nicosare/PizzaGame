@@ -18,5 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c4598f8f30d59e7468a816f904500caa, type: 2}
   - {fileID: 11400000, guid: 9be2e1097eabcb34381a124db898e6f6, type: 2}
   - {fileID: 11400000, guid: 215ee0e256493ea46924a115487142c4, type: 2}
-  cost: 0
-  minimalCafeRating: 0
+  Cost: 50
+  MinimalCafeRating: 0
