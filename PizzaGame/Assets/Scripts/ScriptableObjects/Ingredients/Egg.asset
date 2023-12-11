@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aac2cdadbac923418d4d39ec67dac85, type: 3}
   m_Name: Egg
   m_EditorClassIdentifier: 
-  Icon: {fileID: -1873967027, guid: 24651ac57690824499f88d46656053fe, type: 3}
+  Icon: {fileID: -2027176825, guid: 30cf01f4ecb13a1469d9744b951a7b5c, type: 3}
   nameOfObject: "\u042F\u0439\u0446\u043E"
   ingredients: []

@@ -78,7 +78,7 @@ public class OrderPanel : MonoBehaviour
 
     public void DestroyOrder()
     {
-        var window = transform.parent.parent.GetComponent<OrdersWindow>();
+        var window = transform.GetComponentInParent<OrdersWindow>();
         order.Customer.Interact();
         window.ActionObjectCallBack.CancelAction();
         WindowsController.Instance.CloseWindow(window);

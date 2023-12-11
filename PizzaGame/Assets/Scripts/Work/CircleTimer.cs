@@ -4,13 +4,13 @@ public class TimerCircle : MonoBehaviour
 {
     [SerializeField] private Image image;
     [SerializeField] private ActionObject ActionObjectsCallBack;
-    private float time;
+    public float Time;
     public float MaxTime;
     private bool isStop;
 
     private void OnEnable()
     {
-        time = MaxTime;
+        Time = MaxTime;
         image.fillAmount = 1;
     }
 
@@ -30,18 +30,16 @@ public class TimerCircle : MonoBehaviour
 
         if (!isStop)
         {
-            image.fillAmount = time / MaxTime;
-            if (time > 0)
+            image.fillAmount = Time / MaxTime;
+            if (Time > 0)
             {
-                time -= Time.deltaTime;
+                Time -= UnityEngine.Time.deltaTime;
             }
             else
             {
                 ActionObjectsCallBack.DoAfterTimer();
-                time = MaxTime;
+                Time = MaxTime;
             }
         }
     }
-
-
 }

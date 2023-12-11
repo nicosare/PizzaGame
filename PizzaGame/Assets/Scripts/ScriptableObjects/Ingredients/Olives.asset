@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aac2cdadbac923418d4d39ec67dac85, type: 3}
   m_Name: Olives
   m_EditorClassIdentifier: 
-  Icon: {fileID: -2054113180, guid: 24651ac57690824499f88d46656053fe, type: 3}
+  Icon: {fileID: 257635297, guid: 30cf01f4ecb13a1469d9744b951a7b5c, type: 3}
   nameOfObject: "\u041E\u043B\u0438\u0432\u043A\u0438"
   ingredients: []

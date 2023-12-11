@@ -138,10 +138,10 @@ MonoBehaviour:
   CookedInventoryObject: {fileID: 0}
   timer: {fileID: 8732300471396546961}
   takeOrderButton: {fileID: 4768955660743856323}
-  cancelOrderIcon: {fileID: 21300000, guid: 6b2753b5f945fae4ab7c97c2f8acd138, type: 3}
+  cancelOrderIcon: {fileID: 21300000, guid: 103da1f7893f8bd4dbafe40e38bab405, type: 3}
   customerUI: {fileID: 301679028253924071}
   minusQuitRating: 20
-  WaitingQueueTime: 10
+  WaitingQueueTime: 30
   CustomerName: {fileID: 7988008065159323967}
 --- !u!195 &6943227351495780209
 NavMeshAgent:
@@ -620,7 +620,7 @@ PrefabInstance:
     - target: {fileID: 2943211288305684955, guid: 12b25ac6f31954a419b8e1ea425ea4d9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 938df99f8cc428c449cb1933c7d10052, type: 3}
+      objectReference: {fileID: 21300000, guid: 768e8519649782e4d8de85a6da2edab4, type: 3}
     - target: {fileID: 3600394568851387398, guid: 12b25ac6f31954a419b8e1ea425ea4d9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2

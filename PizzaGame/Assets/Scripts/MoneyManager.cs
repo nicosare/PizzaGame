@@ -7,7 +7,7 @@ using UnityEngine;
 public class MoneyManager : MonoBehaviour
 {
     public static MoneyManager Instance;
-    private int balance = 8000;
+    private int balance = 5000;
     [SerializeField] private Sprite moneyIcon;
     [SerializeField] private TextMeshProUGUI moneyText;
 

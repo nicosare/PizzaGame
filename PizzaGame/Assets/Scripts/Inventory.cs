@@ -29,7 +29,7 @@ public class Inventory : MonoBehaviour
         for (var i = 0; i < UnityEngine.Random.Range(testGiveObject.Count, testGiveObject.Count); i++)
         {
 
-            CreateOrAddObject(testGiveObject[i], 1);
+            CreateOrAddObject(testGiveObject[i], UnityEngine.Random.Range(5, 10));
         }
     }
 
