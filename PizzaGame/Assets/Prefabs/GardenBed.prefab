@@ -195,8 +195,10 @@ MonoBehaviour:
   plantSeedIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   harvestIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   plantName: {fileID: 8899915143607162633}
+  timer: {fileID: 0}
   TimeScaleToGrow: 1
   bonusIngredientCount: 0
+  ChanceToReturnSeed: 0
 --- !u!1 &3743866802693372454
 GameObject:
   m_ObjectHideFlags: 0

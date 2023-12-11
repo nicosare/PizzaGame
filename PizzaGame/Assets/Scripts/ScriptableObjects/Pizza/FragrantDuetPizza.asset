@@ -22,4 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 71dc693f5b858544ea42bf013c7ae2f3, type: 2}
   - {fileID: 11400000, guid: 65760fe9b0173d0409dd7581668035cf, type: 2}
   Cost: 150
-  MinimalCafeRating: 0
+  MinimalCafeRating: 500

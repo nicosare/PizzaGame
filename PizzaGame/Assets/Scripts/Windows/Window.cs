@@ -8,8 +8,6 @@ public abstract class Window : MonoBehaviour
     protected GameObject windowField;
     public ActionObject ActionObjectCallBack;
     [SerializeField]
-    private bool stopTime;
-    [SerializeField]
     private bool closeByEscape;
     public bool OpenFromOtherWindows;
     public bool OpenCancelWindow;
@@ -19,16 +17,6 @@ public abstract class Window : MonoBehaviour
     {
         if (closeByEscape && Input.GetKeyDown(KeyCode.Escape))
             CancelWindow();
-    }
-
-    private void BasicParameters()
-    {
-        Time.timeScale = 1f;
-    }
-
-    private void StopTime()
-    {
-        Time.timeScale = 0f;
     }
 
     public abstract void StartAction(ActionObject actionObject);
