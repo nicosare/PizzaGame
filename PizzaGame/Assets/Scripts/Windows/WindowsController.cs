@@ -12,6 +12,8 @@ public class WindowsController : MonoBehaviour
     public Window PizzaWindow;
     public Window FullInventoryWindow;
     public Window PauseWindow;
+    public Window ShopWindow;
+    public Window MenuWindow;
     public List<Window> UpgradeWindows;
     public static WindowsController Instance;
 
@@ -35,6 +37,11 @@ public class WindowsController : MonoBehaviour
         OpenWindow(FullInventoryWindow);
     }
 
+    public void ShopButton()
+    {
+        OpenWindow(ShopWindow);
+    }
+
     public void PauseButton()
     {
         OpenWindow(PauseWindow);
@@ -43,6 +50,11 @@ public class WindowsController : MonoBehaviour
     public void UpgradeButton(int floorIndex)
     {
         OpenWindow(UpgradeWindows[floorIndex]);
+    }
+
+    public void MenuButton()
+    {
+        OpenWindow(MenuWindow);
     }
 
     public void CloseOtherWindows(Window activeWindow)

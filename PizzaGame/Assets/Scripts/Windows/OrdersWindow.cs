@@ -6,6 +6,7 @@ using UnityEngine;
 public class OrdersWindow : Window
 {
     [SerializeField] private OrderPanel orderPanel;
+    [SerializeField] private PizzaPanel pizzaPanel;
 
     private void LoadItems()
     {
@@ -16,21 +17,34 @@ public class OrdersWindow : Window
         }
     }
 
+    private void LoadMenu()
+    {
+        var availablePizzas = Menu.Instance.AvailablePizzas.OrderBy(pizza => pizza.ingredients.Count);
+        foreach (var pizza in availablePizzas)
+        {
+            var newPanel = Instantiate(pizzaPanel, windowField.transform);
+            newPanel.LoadCleanData(pizza);
+        }
+    }
+
     public override void StartAction(ActionObject actionObject)
     {
-        ActionObjectCallBack = actionObject;
+        if (actionObject != null)
+            ActionObjectCallBack = actionObject;
         foreach (Transform item in windowField.transform)
             Destroy(item.gameObject);
+        if (pizzaPanel == null)
+            LoadItems();
+        else
+            LoadMenu();
 
-        LoadItems();
     }
 
     public override void UpdateWindow()
     {
         if (windowField.activeSelf)
         {
-            if (ActionObjectCallBack != null)
-                StartAction(ActionObjectCallBack);
+            StartAction(ActionObjectCallBack);
         }
     }
 

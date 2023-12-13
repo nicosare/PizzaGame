@@ -26,11 +26,11 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         testGiveObject.Shuffle();
-        for (var i = 0; i < UnityEngine.Random.Range(testGiveObject.Count, testGiveObject.Count); i++)
-        {
+        //for (var i = 0; i < UnityEngine.Random.Range(testGiveObject.Count, testGiveObject.Count); i++)
+        //{
 
-            CreateOrAddObject(testGiveObject[i], UnityEngine.Random.Range(5, 10));
-        }
+        //    CreateOrAddObject(testGiveObject[i], UnityEngine.Random.Range(5, 10));
+        //}
     }
 
     public void CreateOrAddObject(InventoryObject inventoryObject, int amount)

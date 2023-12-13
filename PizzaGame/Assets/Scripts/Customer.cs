@@ -91,8 +91,8 @@ public partial class Customer : ActionObject
 
     private void GoToQueue()
     {
-        customersManager.WaitingCustomers.Add(GetComponent<Moving>());
-        moving.MoveTo(customersManager.GetOrderPlacePosition(GetComponent<Moving>()));
+        customersManager.WaitingCustomers.Add(moving);
+        moving.MoveTo(customersManager.GetOrderPlacePosition(moving));
         StartCoroutine(WaitIsCome());
     }
 
@@ -106,7 +106,7 @@ public partial class Customer : ActionObject
     {
         takeOrderButton.gameObject.SetActive(false);
         timer.gameObject.SetActive(false);
-        customersManager.WaitingCustomers.Remove(GetComponent<Moving>());
+        customersManager.WaitingCustomers.Remove(moving);
         moving.MoveTo(customersManager.GetSittingPlacePosition());
         StartCoroutine(WaitIsCome());
     }
@@ -125,10 +125,10 @@ public partial class Customer : ActionObject
         meshAgent.enabled = true;
         timer.gameObject.SetActive(false);
         takeOrderButton.gameObject.SetActive(false);
-        if (customersManager.WaitingCustomers.Contains(GetComponent<Moving>()))
+        if (customersManager.WaitingCustomers.Contains(moving))
         {
             RatingManager.Instance.TakeRating(minusQuitRating);
-            customersManager.WaitingCustomers.Remove(GetComponent<Moving>());
+            customersManager.WaitingCustomers.Remove(moving);
         }
         moving.MoveTo(customersManager.GetQuitPosition());
         StartCoroutine(WaitIsCome());
@@ -136,7 +136,7 @@ public partial class Customer : ActionObject
 
     private void Destroy()
     {
-        customersManager.Customers.Remove(GetComponent<Moving>());
+        customersManager.Customers.Remove(moving);
         Destroy(gameObject);
     }
 
@@ -186,7 +186,6 @@ public partial class Customer : ActionObject
             CurrentStage = currentStage = CustomerStage.GoToSittingPlace;
         else if (currentStage == CustomerStage.WaitOrder)
         {
-            CurrentStage = currentStage = CustomerStage.Quit;
             if (OrderController.Instance.FirstActiveOrder != null)
             {
                 if (OrderController.Instance.SecondActiveOrder == null)
@@ -197,10 +196,11 @@ public partial class Customer : ActionObject
                 }
                 else
                 {
-                    OrderController.Instance.SecondActiveOrder = null;
                     MoneyManager.Instance.AddMoney((int)OrderController.Instance.SecondActiveOrder.Cost);
                     RatingManager.Instance.AddRating((int)OrderController.Instance.SecondActiveOrder.Rating);
+                    OrderController.Instance.SecondActiveOrder = null;
                 }
+            CurrentStage = currentStage = CustomerStage.Quit;
             }
         }
     }

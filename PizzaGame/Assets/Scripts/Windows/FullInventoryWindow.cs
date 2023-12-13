@@ -12,6 +12,7 @@ public class FullInventoryWindow : Window
     [SerializeField] private List<Button> buttons;
     [SerializeField] private Sprite selectedButtonImage;
     [SerializeField] private Sprite buttonImage;
+    [SerializeField] private Shop shop;
 
     public override void StartAction(ActionObject actionObject)
     {
@@ -35,7 +36,7 @@ public class FullInventoryWindow : Window
         foreach (Transform item in windowField.transform)
             Destroy(item.gameObject);
 
-        var allItems = Inventory.Instance.GetSortedItemsByAmount();
+        var allItems = shop == null ? Inventory.Instance.GetSortedItemsByAmount() : shop.ShopItems;
         foreach (var item in allItems)
         {
             var newItemPanel = Instantiate(itemPanel, windowField.transform);
@@ -53,6 +54,13 @@ public class FullInventoryWindow : Window
             }
             else
                 newItemPanel.GetComponent<Button>().interactable = false;
+            if (shop != null)
+            {
+                if (MoneyManager.Instance.GetBalance() >= item.Key.Cost)
+                    newItemPanel.GetComponent<Button>().interactable = true;
+                else
+                    newItemPanel.GetComponent<Button>().interactable = false;
+            }
         }
     }
 
@@ -62,8 +70,9 @@ public class FullInventoryWindow : Window
         foreach (Transform item in windowField.transform)
             Destroy(item.gameObject);
 
-        var allItems = Inventory.Instance.GetSortedItemsByAmount()
-            .Where(item => item.Key.GetType() == type);
+        var allItems = shop == null ? Inventory.Instance.GetSortedItemsByAmount()
+            .Where(item => item.Key.GetType() == type) :
+            shop.ShopItems.Where(item => item.Key.GetType() == type);
         if (allItems.Any())
             foreach (var item in allItems)
             {
@@ -84,8 +93,9 @@ public class FullInventoryWindow : Window
         foreach (Transform item in windowField.transform)
             Destroy(item.gameObject);
 
-        var allItems = Inventory.Instance.GetSortedItemsByAmount()
-            .Where(item => item.Key.GetType() == inventoryObject.GetType());
+        var allItems = shop == null ? Inventory.Instance.GetSortedItemsByAmount()
+            .Where(item => item.Key.GetType() == inventoryObject.GetType())
+            : shop.ShopItems.Where(item => item.Key.GetType() == inventoryObject.GetType());
         if (allItems.Any())
             foreach (var item in allItems)
             {
@@ -102,6 +112,13 @@ public class FullInventoryWindow : Window
                 }
                 else
                     newItemPanel.GetComponent<Button>().interactable = false;
+                if (shop != null)
+                {
+                    if (MoneyManager.Instance.GetBalance() >= item.Key.Cost)
+                        newItemPanel.GetComponent<Button>().interactable = true;
+                    else
+                        newItemPanel.GetComponent<Button>().interactable = false;
+                }
             }
         else
         {

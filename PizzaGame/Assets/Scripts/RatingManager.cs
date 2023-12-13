@@ -6,13 +6,12 @@ using UnityEngine;
 public class RatingManager : MonoBehaviour
 {
     public static RatingManager Instance;
-    private int rating;
+    [SerializeField] private int rating;
     [SerializeField] private Sprite icon;
-    [SerializeField] TextMeshProUGUI ratingText;
+    private TextMeshProUGUI ratingText;
 
     private void Awake()
     {
-        ratingText.text = rating.ToString();
         if (Instance != null && Instance != this)
             Destroy(gameObject);
         else
@@ -20,6 +19,12 @@ public class RatingManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    public void FindTextField()
+    {
+        ratingText = ShowItemManager.Instance.RatingText;
+        ratingText.text = rating.ToString();
     }
 
     public void AddRating(int rating)

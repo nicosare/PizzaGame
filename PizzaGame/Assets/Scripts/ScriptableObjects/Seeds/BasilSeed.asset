@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   nameOfObject: "\u0421\u0435\u043C\u0435\u043D\u0430 \u0431\u0430\u0437\u0438\u043B\u0438\u043A\u0430"
+  Cost: 30
   Ingredient: {fileID: 11400000, guid: 71dc693f5b858544ea42bf013c7ae2f3, type: 2}
   TimeToGrow: 10
   minAmountInclusive: 2
