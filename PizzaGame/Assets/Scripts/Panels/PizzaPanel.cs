@@ -15,6 +15,7 @@ public class PizzaPanel : MonoBehaviour
     [SerializeField] private Transform starsPanel;
     [SerializeField] private TextMeshProUGUI ratingText;
     [SerializeField] private float rating;
+    [SerializeField] private GameObject ratingPanel;
     public float ActualCost;
     private Pizza pizza;
     private Order order;
@@ -34,6 +35,22 @@ public class PizzaPanel : MonoBehaviour
             var newIngredientPanel = Instantiate(ingredientPanel, ingredientsField);
             newIngredientPanel.LoadData(ingredient);
         }
+    }
+
+    public void LoadCleanData(Pizza pizza)
+    {
+        ratingPanel.SetActive(false);
+        starsPanel.gameObject.SetActive(false);
+        this.pizza = pizza;
+        pizzaIcon.sprite = pizza.Icon;
+        pizzaName.text = pizza.nameOfObject;
+        cost.text = pizza.Cost.ToString();
+        foreach (var ingredient in pizza.ingredients)
+        {
+            var newIngredientPanel = Instantiate(ingredientPanel, ingredientsField);
+            newIngredientPanel.LoadData(ingredient);
+        }
+        GetComponent<Button>().interactable = false;
     }
 
     private void SetLevelPizza()

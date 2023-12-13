@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,8 @@ public class ShowItemManager : MonoBehaviour
     public static ShowItemManager Instance;
     [SerializeField] private Transform itemField;
     [SerializeField] private ShowItemPanel showItemPanel;
-    private bool isShow;
+    public TextMeshProUGUI RatingText;
+    public TextMeshProUGUI BalanceText;
     private List<ShowItemPanel> panels;
 
     private void Awake()

@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: -2027176825, guid: 30cf01f4ecb13a1469d9744b951a7b5c, type: 3}
   nameOfObject: "\u042F\u0439\u0446\u043E"
+  Cost: 20
   ingredients: []

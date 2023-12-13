@@ -23,7 +23,7 @@ public class WeatherControl : MonoBehaviour
     [SerializeField] private int minute = 0;
     [SerializeField] private float secondsPerMinute = 1f;
     [SerializeField] private bool realTimeClock = false;
-
+    public bool FreezeTime = false;
 
     [Header("Day Colors")]
     [SerializeField] private Color morningLight = new Color(1f, 0.9280525f, 0.6289308f, 1f);
@@ -84,27 +84,29 @@ public class WeatherControl : MonoBehaviour
             weatherProbabilities = noSeasonsSettings.GetNoSeason().GetProbabilities();
             weatherParticleSystemOptions = noSeasonsSettings.GetNoSeason().GetParticleSystems();
         }
-
-        launchCoroutine = true;
+        if (!FreezeTime)
+            launchCoroutine = true;
     }
 
     void Update()
     {
         TimeAndCalendarFormatChecking();
-
-        if (launchCoroutine && !realTimeClock)
+        if (!FreezeTime)
         {
-            launchCoroutine = false;
-            StartCoroutine("ClockSimulation");
+            if (launchCoroutine && !realTimeClock)
+            {
+                launchCoroutine = false;
+                StartCoroutine("ClockSimulation");
+            }
+
+
+            if (seasons)
+            {
+                SetSeason();
+            }
         }
         WeatherTimeController();
-
-        if (seasons)
-        {
-            SetSeason();
-        }
     }
-
 
     IEnumerator ClockSimulation()
     {

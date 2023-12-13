@@ -7,15 +7,24 @@ public class CameraControl : MonoBehaviour
 {
     [SerializeField] private float speed;
 
-    [SerializeField] private float leftBorder;
-    [SerializeField] private float rightBorder;
-    [SerializeField] private float topBorder;
-    [SerializeField] private float bottomBorder;
+    private float leftBorder;
+    private float rightBorder;
+    private float topBorder;
+    private float bottomBorder;
 
     [SerializeField] private Transform leftPanel;
     [SerializeField] private Transform rightPanel;
     [SerializeField] private Transform topPanel;
     [SerializeField] private Transform bottomPanel;
+
+    [SerializeField] private float minFurtherX;
+    [SerializeField] private float maxFurtherX;
+    [SerializeField] private float minNearX;
+    [SerializeField] private float maxNearX;
+    [SerializeField] private float minFurtherY;
+    [SerializeField] private float maxFurtherY;
+    [SerializeField] private float minNearY;
+    [SerializeField] private float maxNearY;
 
     private Zoom zoom;
 
@@ -74,10 +83,10 @@ public class CameraControl : MonoBehaviour
     public void SetBorder()
     {
         var normalizedZ = (transform.position.z - zoom.zoomMin) / (zoom.zoomMax - zoom.zoomMin);
-        leftBorder = Mathf.Lerp(0, -7f, normalizedZ);
-        rightBorder = Mathf.Lerp(0, 7f, normalizedZ);
-        bottomBorder = Mathf.Lerp(1, -7f, normalizedZ);
-        topBorder = Mathf.Lerp(12f, 7f, normalizedZ);
+        leftBorder = Mathf.Lerp(minFurtherX, minNearX, normalizedZ);
+        rightBorder = Mathf.Lerp(maxFurtherX, maxNearX, normalizedZ);
+        bottomBorder = Mathf.Lerp(minFurtherY, minNearY, normalizedZ);
+        topBorder = Mathf.Lerp(maxFurtherY, maxNearY, normalizedZ);
         CheckBorders();
 
     }

@@ -7,13 +7,12 @@ using UnityEngine;
 public class MoneyManager : MonoBehaviour
 {
     public static MoneyManager Instance;
-    private int balance = 5000;
+    [SerializeField] private int balance;
     [SerializeField] private Sprite moneyIcon;
-    [SerializeField] private TextMeshProUGUI moneyText;
+    private TextMeshProUGUI moneyText;
 
     private void Awake()
     {
-        moneyText.text = balance.ToString();
         if (Instance != null && Instance != this)
             Destroy(gameObject);
         else
@@ -21,6 +20,12 @@ public class MoneyManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    public void FindTextField()
+    {
+        moneyText = ShowItemManager.Instance.BalanceText;
+        moneyText.text = balance.ToString();
     }
 
     public void AddMoney(int money)

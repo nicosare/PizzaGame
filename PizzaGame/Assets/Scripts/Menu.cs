@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Menu : MonoBehaviour
-{    
+{
     [SerializeField] private List<Pizza> AllPizzas;
     public List<Pizza> AvailablePizzas;
     public static Menu Instance;
@@ -10,7 +11,7 @@ public class Menu : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        
+
         foreach (var pizza in AllPizzas)
         {
             if (pizza.MinimalCafeRating <= RatingManager.Instance.GetRatingValue())
