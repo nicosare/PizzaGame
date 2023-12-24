@@ -48,7 +48,6 @@ public class Furnace : ActionObject
             {
                 if (OrderController.Instance.SecondActiveOrder == null)
                 {
-                    Debug.Log(OrderController.Instance.FirstActiveOrder);
                     CookedInventoryObject = OrderController.Instance.FirstActiveOrder.Pizza;
                 }
                 else

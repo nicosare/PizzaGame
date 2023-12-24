@@ -32,7 +32,6 @@ public class UpgradeFloorWindow : Window
         else if (buttonIndex == floor.FloorLevel)
         {
             upgradePanel.UpgradeButton.GetComponentInChildren<TextMeshProUGUI>().text = "Повысить";
-            Debug.Log(MoneyManager.Instance.GetBalance());
             if (MoneyManager.Instance.GetBalance() >= upgradePanel.Cost)
                 upgradePanel.UpgradeButton.enabled = true;
             else

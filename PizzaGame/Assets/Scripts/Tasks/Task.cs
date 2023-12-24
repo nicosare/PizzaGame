@@ -9,11 +9,11 @@ public class Task : MonoBehaviour
     protected ActionObject actionObject;
     protected InventoryObject inventoryObject;
     protected int amountOfObjects;
-
-
+    
     private void Awake()
     {
-        playerMove = GameObject.FindGameObjectWithTag("Player").GetComponent<Moving>();
+        playerMove = transform.parent.GetComponent<TaskManager>().Player;
+        playerMove.gameObject.SetActive(true);
     }
 
     protected void CallPlayer(Vector3 position)
@@ -25,6 +25,15 @@ public class Task : MonoBehaviour
     private IEnumerator WaitPlayerCome()
     {
         yield return new WaitUntil(() => playerMove.IsCome);
+        TaskManager.Instance.BlockCreateTask = true;
+
+        if (actionObject != null && actionObject.Particles != null)
+        {
+            var particles = Instantiate(actionObject.Particles, (playerMove.transform.position + actionObject.transform.position) / 2, Quaternion.identity.normalized, actionObject.transform);
+            yield return new WaitForSeconds(actionObject.WaitingTimeBeforeAction);
+            Destroy(particles.gameObject);
+        }
+
         TaskManager.Instance.BlockCreateTask = false;
         InnerDo();
         CompleteTask();
@@ -55,7 +64,6 @@ public class Task : MonoBehaviour
 
     protected virtual void InnerDo()
     {
-        Debug.Log("InnerDo!");
         return;
     }
 }

@@ -6,7 +6,6 @@ public class TaskAction : Task
 {
     protected override void InnerDo()
     {
-        Debug.Log(actionObject);
         actionObject.StartAction();
     }
 

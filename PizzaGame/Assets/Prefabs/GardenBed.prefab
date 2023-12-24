@@ -195,7 +195,6 @@ MonoBehaviour:
   plantSeedIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   harvestIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   plantName: {fileID: 8899915143607162633}
-  timer: {fileID: 0}
   TimeScaleToGrow: 1
   bonusIngredientCount: 0
   ChanceToReturnSeed: 0
@@ -465,6 +464,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: db7be3ed4a936444088f2c05187ae588, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: baf207c4cb37a6748b55cf7c637809c8, type: 2}
+    - target: {fileID: -7511558181221131132, guid: db7be3ed4a936444088f2c05187ae588, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 543ebcf468f36ba458e438ee4048a0f3, type: 2}
     - target: {fileID: 919132149155446097, guid: db7be3ed4a936444088f2c05187ae588, type: 3}
       propertyPath: m_Name
       value: "\u0413\u0440\u044F\u0434\u043A\u0430"

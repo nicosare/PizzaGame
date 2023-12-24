@@ -22,8 +22,9 @@ public class MoneyManager : MonoBehaviour
         }
     }
 
-    public void FindTextField()
+    public void Initialization()
     {
+        StopAllCoroutines();
         moneyText = ShowItemManager.Instance.BalanceText;
         moneyText.text = balance.ToString();
     }

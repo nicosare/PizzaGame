@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public bool IsGamePaused;
+
     private void Awake()
     {
         if (Instance == null)
@@ -22,23 +24,65 @@ public class GameManager : MonoBehaviour
         SceneManager.activeSceneChanged += Initialization;
     }
 
-    void Start()
+    private void Start()
     {
         var currentScene = SceneManager.GetActiveScene();
         Initialization(currentScene, currentScene);
+        LoadData();
     }
 
-    void Initialization(Scene current, Scene next)
+    private void LoadFloorLevels()
     {
-        RatingManager.Instance.FindTextField();
-        MoneyManager.Instance.FindTextField();
+        //TODO Подключиться к БД
+        Debug.Log("Floors sets!");
+        FloorsManager.FloorLevels.Add(0, 1);
+        FloorsManager.FloorLevels.Add(1, 1);
+        FloorsManager.FloorLevels.Add(2, 1);
     }
 
+    private void LoadInventory()
+    {
+        //TODO Подключиться к БД
+    }
+
+    private void LoadRating()
+    {
+        //TODO Подключиться к БД
+    }
+
+    private void LoadBalance()
+    {
+        //TODO Подключиться к БД
+    }
+
+    private void LoadDays()
+    {
+        //TODO Подключиться к БД
+    }
+
+    private void LoadData()
+    {
+        LoadInventory();
+        LoadRating();
+        LoadBalance();
+        LoadDays();
+        LoadFloorLevels();
+    }
+
+    private void Initialization(Scene current, Scene next)
+    {
+        RatingManager.Instance.Initialization();
+        MoneyManager.Instance.Initialization();
+        WeatherControl.Instance.Initialization();
+        Inventory.Instance.Initialization();
+    }
 
     private void Update()
     {
         if (WeatherControl.Instance.Hour == 20)
+        {
             DayToNight();
+        }
     }
 
     public void PauseGame()
@@ -69,14 +113,17 @@ public class GameManager : MonoBehaviour
     private void DayToNight()
     {
         WeatherControl.Instance.FreezeTime = true;
-        WeatherControl.Instance.Hour = 0;
-        LoadScene("NightScene");
+
+        LoadScene("NightScene" + Random.Range(1, 3));
+        WeatherControl.Instance.Hour = 24;
+        WeatherControl.Instance.Minute = 0;
     }
 
-    private void NightToDay()
+    public void NightToDay()
     {
         WeatherControl.Instance.FreezeTime = false;
-        WeatherControl.Instance.Hour = 8;
         LoadScene("DayScene");
+        WeatherControl.Instance.Hour = 8;
+        WeatherControl.Instance.Minute = 0;
     }
 }

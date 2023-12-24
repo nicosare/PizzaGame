@@ -9,9 +9,11 @@ public class TaskManager : MonoBehaviour
     private Task task;
     private Guid actualTaskUID;
     public bool BlockCreateTask;
+    public Moving Player;
 
     private void Awake()
     {
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Moving>();
         Instance = this;
     }
 
@@ -25,7 +27,6 @@ public class TaskManager : MonoBehaviour
             this.task.Do(targetPosition);
         }
         var guid = Guid.NewGuid();
-        Debug.Log(guid);
         return actualTaskUID = guid;
     }
 
@@ -36,13 +37,11 @@ public class TaskManager : MonoBehaviour
             BlockCreateTask = isTaskIrrevocable;
             ResetTask();
             this.task = Instantiate(task, transform);
-            Debug.Log(actionObject);
             this.task.Do(actionObject, inventoryObject, amount);
         }
         else
             CancelTasK(actionObject);
         var guid = Guid.NewGuid();
-        Debug.Log(guid);
         return actualTaskUID = guid;
     }
 

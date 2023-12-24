@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e15bd0fa864e1349ac5bfcb2b905f1b, type: 3}
   m_Name: OliveSeed
   m_EditorClassIdentifier: 
-  Icon: {fileID: 0}
+  Icon: {fileID: -1004120803, guid: a3a9fe90eb39ed3478cf4cff27f0b268, type: 3}
   nameOfObject: "\u0421\u0435\u043C\u0435\u043D\u0430 \u043E\u043B\u0438\u0432\u043E\u043A"
   Cost: 30
   Ingredient: {fileID: 11400000, guid: b9ae618e42e4d3547924fe2fd3d0f4b6, type: 2}

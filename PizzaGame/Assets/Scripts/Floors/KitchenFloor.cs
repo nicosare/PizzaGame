@@ -36,11 +36,6 @@ public class KitchenFloor : Floor
         };
     }
 
-    protected override void SetLevel()
-    {
-        FloorLevel = 0;
-    }
-
     private void SpeedUpCookTimeUpgrade()
     {
         foreach (var furnace in furnaces)

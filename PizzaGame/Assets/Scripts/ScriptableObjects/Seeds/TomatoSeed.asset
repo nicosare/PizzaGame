@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e15bd0fa864e1349ac5bfcb2b905f1b, type: 3}
   m_Name: TomatoSeed
   m_EditorClassIdentifier: 
-  Icon: {fileID: 0}
+  Icon: {fileID: -14453165, guid: a3a9fe90eb39ed3478cf4cff27f0b268, type: 3}
   nameOfObject: "\u0421\u0435\u043C\u0435\u043D\u0430 \u043F\u043E\u043C\u0438\u0434\u043E\u0440\u0430"
   Cost: 30
   Ingredient: {fileID: 11400000, guid: 12dc5dff430869e4399794fb0838f97b, type: 2}

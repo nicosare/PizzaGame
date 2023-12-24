@@ -148,4 +148,14 @@ public class FullInventoryWindow : Window
             ActionObjectCallBack = null;
         }
     }
+
+    public override void CancelWindow()
+    {
+        foreach (Transform item in windowField.transform)
+            Destroy(item.gameObject);
+        gameObject.SetActive(false);
+        if (ActionObjectCallBack != null)
+            ActionObjectCallBack.CancelAction();
+        ActionObjectCallBack = null;
+    }
 }

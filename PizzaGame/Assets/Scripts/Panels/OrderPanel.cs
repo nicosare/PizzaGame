@@ -53,7 +53,6 @@ public class OrderPanel : MonoBehaviour
                 OrderController.Instance.FirstActiveOrder = order;
                 OrderController.Instance.Orders.Remove(order);
                 window.ActionObjectCallBack.CookedInventoryObject = order.Pizza;
-                Debug.Log(order.ToString());
                 TaskManager.Instance.CreateTask(window.ActionObjectCallBack.TaskCook, window.ActionObjectCallBack, order.Pizza, 1, true);
                 WindowsController.Instance.CloseWindow(window);
             }
@@ -62,7 +61,6 @@ public class OrderPanel : MonoBehaviour
                 OrderController.Instance.SecondActiveOrder = order;
                 OrderController.Instance.Orders.Remove(order);
                 window.ActionObjectCallBack.CookedInventoryObject = order.Pizza;
-                Debug.Log(order.ToString());
                 TaskManager.Instance.CreateTask(window.ActionObjectCallBack.TaskCook, window.ActionObjectCallBack, order.Pizza, 1, true);
                 WindowsController.Instance.CloseWindow(window);
 

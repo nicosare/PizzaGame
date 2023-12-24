@@ -20,7 +20,7 @@ public class WeatherControl : MonoBehaviour
 
     [Header("Time")]
     public int Hour = 0;
-    [SerializeField] private int minute = 0;
+    public int Minute = 0;
     [SerializeField] private float secondsPerMinute = 1f;
     [SerializeField] private bool realTimeClock = false;
     public bool FreezeTime = false;
@@ -29,6 +29,7 @@ public class WeatherControl : MonoBehaviour
     [SerializeField] private Color morningLight = new Color(1f, 0.9280525f, 0.6289308f, 1f);
     [SerializeField] private Color eveningLight = new Color(0.4921679f, 0.5660581f, 0.990566f);
     [SerializeField] private Color nightLight = new Color(0.4921679f, 0.5660581f, 0.990566f);
+    [SerializeField] private Material skyboxMaterial;
 
     [Header("Date")]
     [SerializeField] private bool weeksAndMonths = true;
@@ -75,7 +76,7 @@ public class WeatherControl : MonoBehaviour
         if (realTimeClock)
         {
             Hour = System.DateTime.Now.Hour;
-            minute = System.DateTime.Now.Minute;
+            Minute = System.DateTime.Now.Minute;
             currentMonth = System.DateTime.Now.Month;
             currentDay = System.DateTime.Now.Day;
         }
@@ -84,8 +85,6 @@ public class WeatherControl : MonoBehaviour
             weatherProbabilities = noSeasonsSettings.GetNoSeason().GetProbabilities();
             weatherParticleSystemOptions = noSeasonsSettings.GetNoSeason().GetParticleSystems();
         }
-        if (!FreezeTime)
-            launchCoroutine = true;
     }
 
     void Update()
@@ -112,15 +111,26 @@ public class WeatherControl : MonoBehaviour
     {
         yield return new WaitForSeconds(secondsPerMinute);
 
-        minute = minute + 1;
+        Minute = Minute + 1;
 
-        if (minute == 60)
+        if (Minute == 60)
         {
-            minute = 0;
+            Minute = 0;
             Hour = Hour + 1;
         }
 
         launchCoroutine = true;
+    }
+
+    public void Initialization()
+    {
+        clockText = ShowItemManager.Instance.ClockText;
+        calendarText = ShowItemManager.Instance.CalendarText;
+
+        if (!FreezeTime)
+            launchCoroutine = true;
+
+        TimeController();
     }
 
     static int GetIntegerDigitCountString(int value)
@@ -148,18 +158,18 @@ public class WeatherControl : MonoBehaviour
         if (realTimeClock)
         {
             Hour = System.DateTime.Now.Hour;
-            minute = System.DateTime.Now.Minute;
+            Minute = System.DateTime.Now.Minute;
             currentMonth = System.DateTime.Now.Month;
             currentDay = System.DateTime.Now.Day;
         }
 
-        if (GetIntegerDigitCountString(minute) == 1)
+        if (GetIntegerDigitCountString(Minute) == 1)
         {
-            minuteString = "0" + minute.ToString();
+            minuteString = "0" + Minute.ToString();
         }
         else
         {
-            minuteString = minute.ToString();
+            minuteString = Minute.ToString();
         }
 
         if (GetIntegerDigitCountString(Hour) == 1)
@@ -170,16 +180,18 @@ public class WeatherControl : MonoBehaviour
         {
             hourString = Hour.ToString();
         }
-
-        clockText.text = hourString + ":" + minuteString;
+        if (clockText != null)
+            clockText.text = hourString + ":" + minuteString;
 
         if (weeksAndMonths)
         {
-            calendarText.text = months.GetMonths()[currentMonth - 1].GetName() + ", " + currentDay + "\n" + GetRusName();
+            if (calendarText != null)
+                calendarText.text = months.GetMonths()[currentMonth - 1].GetName() + ", " + currentDay + "\n" + GetRusName();
         }
         else
         {
-            calendarText.text = "Δενό: " + currentDay;
+            if (calendarText != null)
+                calendarText.text = "Δενό: " + currentDay;
         }
     }
     private string GetRusName()
@@ -249,9 +261,9 @@ public class WeatherControl : MonoBehaviour
     private void TimeController()
     {
 
-        float morningHour = 8;
-        float eveningHour = 18;
-        float nightHour = 21;
+        float morningHour = noSeasonsSettings.GetNoSeason().GetMorningHour();
+        float eveningHour = noSeasonsSettings.GetNoSeason().GetEveningHour();
+        float nightHour = noSeasonsSettings.GetNoSeason().GetNightHour();
 
         if (currentSeason != null)
         {
@@ -264,18 +276,23 @@ public class WeatherControl : MonoBehaviour
             lerpNormalization = (Hour - 0f) / (morningHour - 0f);
             lerpNormalization = lerpNormalization * lerpNormalization * (3f - 2f * lerpNormalization);
             weatherColor = Color.Lerp(nightLight, morningLight, lerpNormalization);
+            skyboxMaterial.SetColor("_TintColor", Color.Lerp(nightLight, morningLight, lerpNormalization));
+
         }
         else if (Hour >= morningHour && Hour <= eveningHour)
         {
             lerpNormalization = (Hour - morningHour) / (eveningHour - morningHour);
             lerpNormalization = lerpNormalization * lerpNormalization * (3f - 2f * lerpNormalization);
             weatherColor = Color.Lerp(morningLight, eveningLight, lerpNormalization);
+            skyboxMaterial.SetColor("_TintColor", Color.Lerp(morningLight, eveningLight, lerpNormalization));
         }
         else if (Hour > eveningHour && Hour <= nightHour)
         {
             lerpNormalization = (Hour - eveningHour) / (nightHour - eveningHour);
             lerpNormalization = lerpNormalization * lerpNormalization * (3f - 2f * lerpNormalization);
             weatherColor = Color.Lerp(eveningLight, nightLight, lerpNormalization);
+            skyboxMaterial.SetColor("_TintColor", Color.Lerp(eveningLight, nightLight, lerpNormalization));
+
 
         }
         else if (Hour > nightHour && Hour <= 24)
@@ -283,6 +300,7 @@ public class WeatherControl : MonoBehaviour
             lerpNormalization = (Hour - nightHour) / (24f - nightHour);
             lerpNormalization = lerpNormalization * lerpNormalization * (3f - 2f * lerpNormalization);
             weatherColor = Color.Lerp(nightLight, nightLight, lerpNormalization);
+            skyboxMaterial.SetColor("_TintColor", Color.Lerp(nightLight, nightLight, lerpNormalization));
 
         }
     }

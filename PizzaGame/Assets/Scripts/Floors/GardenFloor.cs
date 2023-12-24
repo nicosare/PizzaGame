@@ -41,12 +41,6 @@ public class GardenFloor : Floor
         };
     }
 
-    protected override void SetLevel()
-    {
-        //TODO Подключиться к базе данных
-        FloorLevel = 0;
-    }
-
     private void AddGardenBedUpgrade()
     {
         availableGardenBedsCount++;

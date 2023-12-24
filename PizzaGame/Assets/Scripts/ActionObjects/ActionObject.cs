@@ -19,6 +19,8 @@ public abstract class ActionObject : MonoBehaviour, IInteractable
     public InventoryObject Item;
     public List<Pizza> Pizzas;
     public CookedInventoryObject CookedInventoryObject;
+    public float WaitingTimeBeforeAction;
+    public ParticleSystem Particles;
     public abstract Type typeOfNeededItem { get; }
 
     protected void OpenButton(Vector3 buttonPosition, Sprite icon)
@@ -39,7 +41,6 @@ public abstract class ActionObject : MonoBehaviour, IInteractable
         if (!Inventory.Instance.TryTakeOrRemoveObject(inventoryObject, amount))
         {
             CancelAction();
-            Debug.Log($"Недостаточно {inventoryObject}!");
         }
     }
 
