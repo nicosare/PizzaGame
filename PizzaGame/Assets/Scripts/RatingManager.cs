@@ -21,8 +21,9 @@ public class RatingManager : MonoBehaviour
         }
     }
 
-    public void FindTextField()
+    public void Initialization()
     {
+        StopAllCoroutines();
         ratingText = ShowItemManager.Instance.RatingText;
         ratingText.text = rating.ToString();
     }

@@ -9,7 +9,7 @@ public class ActionButtonCanvas : MonoBehaviour
 {
     private IInteractable interactableParent;
     public Button ActionButton;
-    
+
     private void Awake()
     {
         const int buttonIndex = 0;

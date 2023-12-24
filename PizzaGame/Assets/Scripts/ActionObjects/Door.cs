@@ -37,7 +37,6 @@ public class Door : ActionObject
     {
         yield return new WaitUntil(() => CustomersManager.Instance.IsDayStarted);
         actionButton.CloseButton();
-        Debug.Log(CustomersManager.Instance.IsDayStarted);
         TaskManager.Instance.CreateTask(TaskAction, this, null, 0, true);
     }
 

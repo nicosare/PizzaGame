@@ -33,11 +33,6 @@ public class CafeFloor : Floor
         };
     }
 
-    protected override void SetLevel()
-    {
-        FloorLevel = 0;
-    }
-
     private void CustomersWaitLongerUpgrade()
     {
         CustomersManager.Instance.WaitInQueueScale *= waitInQueueTimeScale;

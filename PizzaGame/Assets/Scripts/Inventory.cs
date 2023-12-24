@@ -9,8 +9,7 @@ public class Inventory : MonoBehaviour
 {
     private Dictionary<InventoryObject, int> inventory = new Dictionary<InventoryObject, int>();
     public static Inventory Instance;
-    [SerializeField] private List<Window> windows;
-    [SerializeField] private List<InventoryObject> testGiveObject;
+    public List<Window> Windows;
 
     private void Awake()
     {
@@ -22,15 +21,14 @@ public class Inventory : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
-    private void Start()
+    public void Initialization()
     {
-        testGiveObject.Shuffle();
-        //for (var i = 0; i < UnityEngine.Random.Range(testGiveObject.Count, testGiveObject.Count); i++)
-        //{
-
-        //    CreateOrAddObject(testGiveObject[i], UnityEngine.Random.Range(5, 10));
-        //}
+        var sliderCreateWindow = FindObjectOfType<SliderCreateWindow>();
+        if (!Windows.Contains(sliderCreateWindow) && sliderCreateWindow != null)
+            Windows.Add(sliderCreateWindow);
+        var fullInventoryWindow = FindObjectOfType<FullInventoryWindow>();
+        if (!Windows.Contains(fullInventoryWindow) && fullInventoryWindow != null)
+            Windows.Add(fullInventoryWindow);
     }
 
     public void CreateOrAddObject(InventoryObject inventoryObject, int amount)
@@ -43,7 +41,7 @@ public class Inventory : MonoBehaviour
         if (inventoryObject is not Pizza)
             ShowItemManager.Instance.ShowTakeItem(inventoryObject.Icon, inventoryObject.nameOfObject, amount);
 
-        foreach (var window in windows)
+        foreach (var window in Windows)
             WindowsController.Instance.UpdateWindow(window);
     }
 
@@ -59,7 +57,7 @@ public class Inventory : MonoBehaviour
             if (inventoryObject is not Pizza)
                 ShowItemManager.Instance.ShowGiveItem(inventoryObject.Icon, inventoryObject.nameOfObject, amount);
 
-            foreach (var window in windows)
+            foreach (var window in Windows)
                 WindowsController.Instance.UpdateWindow(window);
 
             return true;

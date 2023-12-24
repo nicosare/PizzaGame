@@ -11,6 +11,8 @@ public class ShowItemManager : MonoBehaviour
     public static ShowItemManager Instance;
     [SerializeField] private Transform itemField;
     [SerializeField] private ShowItemPanel showItemPanel;
+    public TextMeshProUGUI ClockText;
+    public TextMeshProUGUI CalendarText;
     public TextMeshProUGUI RatingText;
     public TextMeshProUGUI BalanceText;
     private List<ShowItemPanel> panels;

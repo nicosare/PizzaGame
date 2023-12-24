@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e15bd0fa864e1349ac5bfcb2b905f1b, type: 3}
   m_Name: OnionSeed
   m_EditorClassIdentifier: 
-  Icon: {fileID: 0}
+  Icon: {fileID: -1618314538, guid: a3a9fe90eb39ed3478cf4cff27f0b268, type: 3}
   nameOfObject: "\u0421\u0435\u043C\u0435\u043D\u0430 \u043B\u0443\u043A\u0430"
   Cost: 30
   Ingredient: {fileID: 11400000, guid: 223ba03a0f83736479f13622336c79a6, type: 2}
