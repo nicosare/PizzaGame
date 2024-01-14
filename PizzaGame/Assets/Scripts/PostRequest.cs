@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
-using System.Text;
-using UnityEngine.UI;
-using TMPro;
 
 public class PostRequest : MonoBehaviour
 {

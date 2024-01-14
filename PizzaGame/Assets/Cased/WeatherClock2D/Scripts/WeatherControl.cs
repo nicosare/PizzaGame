@@ -2,11 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-using UnityEditor;
-using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
+using UnityEditor;
+using UnityEngine;
 
 public class WeatherControl : MonoBehaviour
 {
