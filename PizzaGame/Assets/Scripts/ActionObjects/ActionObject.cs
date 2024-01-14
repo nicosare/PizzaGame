@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public abstract class ActionObject : MonoBehaviour, IInteractable
 {
