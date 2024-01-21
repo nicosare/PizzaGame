@@ -1,6 +1,15 @@
+using System.Collections.Generic;
+
 [System.Serializable]
 
-    public struct PlayersLeaderboard
+public record Leaderboards
+{
+    public PlayersLeaderboard[] leaderboard;
+}
+
+[System.Serializable]
+
+    public record PlayersLeaderboard
     {
         public int placeInTop;
         public string login;

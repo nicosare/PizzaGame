@@ -1,6 +1,6 @@
 [System.Serializable]
 
-    public struct PlayersLeaderboardResponseMassive
+    public record PlayersLeaderboardResponseMassive
     {
         public PlayersLeaderboard[] leaderboard;
     }
